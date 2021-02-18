@@ -14,14 +14,13 @@ class MainTabController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
-        
     }
 
     // MARK: - Helpers
     
     func configureViewController() {
         
-        let layout = UICollectionViewFlowLayout()
+        let layout = CustomLayout()
         let feed = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "Home_unselected"), selectedImage: #imageLiteral(resourceName: "Home_selected "), rootViewController: FeedController(collectionViewLayout: layout))
         let search = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "Search_unselected"), selectedImage: #imageLiteral(resourceName: "Search_selected"), rootViewController: SearchController())
         let postCreator = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "Create"), selectedImage:#imageLiteral(resourceName: "Create"), rootViewController: PostCreatorController())

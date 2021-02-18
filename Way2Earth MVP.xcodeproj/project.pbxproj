@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1B5ADAD625D21D470016A78F /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5ADAD525D21D470016A78F /* Colors.swift */; };
 		1B5F5B8925D0896D004940A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5F5B8825D0896D004940A4 /* AppDelegate.swift */; };
 		1B5F5B8B25D0896D004940A4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5F5B8A25D0896D004940A4 /* SceneDelegate.swift */; };
 		1B5F5B9225D0896D004940A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B5F5B9125D0896D004940A4 /* Assets.xcassets */; };
@@ -19,11 +18,16 @@
 		1B5F5BB625D08C9C004940A4 /* PostCreatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5F5BB525D08C9C004940A4 /* PostCreatorController.swift */; };
 		1B5F5BB925D08CA8004940A4 /* NotificationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5F5BB825D08CA8004940A4 /* NotificationsController.swift */; };
 		1B5F5BBC25D08CB2004940A4 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5F5BBB25D08CB2004940A4 /* ProfileController.swift */; };
+		1B952CBE25DCEAF700F7AAC2 /* Merriweather-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B952CBD25DCEAF700F7AAC2 /* Merriweather-Bold.ttf */; };
+		1B952CC125DCEB0400F7AAC2 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B952CC025DCEB0400F7AAC2 /* OpenSans-Regular.ttf */; };
 		1BD801F925DC98AA009F6EA8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD801F825DC98AA009F6EA8 /* Extensions.swift */; };
+		1BD8021425DCAFF1009F6EA8 /* CustomLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8021325DCAFF1009F6EA8 /* CustomLayout.swift */; };
+		1BD8021725DCB007009F6EA8 /* CustomLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8021625DCB007009F6EA8 /* CustomLayoutAttributes.swift */; };
+		1BD8021D25DCB077009F6EA8 /* LayoutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8021C25DCB077009F6EA8 /* LayoutItem.swift */; };
+		1BD8022025DCB1C3009F6EA8 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8021F25DCB1C3009F6EA8 /* FeedCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1B5ADAD525D21D470016A78F /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		1B5F5B8525D0896D004940A4 /* Way2Earth MVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Way2Earth MVP.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B5F5B8825D0896D004940A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B5F5B8A25D0896D004940A4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,7 +41,13 @@
 		1B5F5BB525D08C9C004940A4 /* PostCreatorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreatorController.swift; sourceTree = "<group>"; };
 		1B5F5BB825D08CA8004940A4 /* NotificationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsController.swift; sourceTree = "<group>"; };
 		1B5F5BBB25D08CB2004940A4 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		1B952CBD25DCEAF700F7AAC2 /* Merriweather-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Bold.ttf"; sourceTree = "<group>"; };
+		1B952CC025DCEB0400F7AAC2 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		1BD801F825DC98AA009F6EA8 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		1BD8021325DCAFF1009F6EA8 /* CustomLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLayout.swift; sourceTree = "<group>"; };
+		1BD8021625DCB007009F6EA8 /* CustomLayoutAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLayoutAttributes.swift; sourceTree = "<group>"; };
+		1BD8021C25DCB077009F6EA8 /* LayoutItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutItem.swift; sourceTree = "<group>"; };
+		1BD8021F25DCB1C3009F6EA8 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,8 +99,9 @@
 		1B5F5B9D25D089F6004940A4 /* Utils  */ = {
 			isa = PBXGroup;
 			children = (
+				1B952CBC25DCEAE300F7AAC2 /* Fonts  */,
+				1BD8021225DCAFE4009F6EA8 /* Layout */,
 				1BD801F825DC98AA009F6EA8 /* Extensions.swift */,
-				1B5ADAD525D21D470016A78F /* Colors.swift */,
 			);
 			path = "Utils ";
 			sourceTree = "<group>";
@@ -125,6 +136,7 @@
 		1B5F5BA325D08A0B004940A4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1BD8021F25DCB1C3009F6EA8 /* FeedCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -134,6 +146,33 @@
 			children = (
 			);
 			path = "Model ";
+			sourceTree = "<group>";
+		};
+		1B952CBC25DCEAE300F7AAC2 /* Fonts  */ = {
+			isa = PBXGroup;
+			children = (
+				1B952CBD25DCEAF700F7AAC2 /* Merriweather-Bold.ttf */,
+				1B952CC025DCEB0400F7AAC2 /* OpenSans-Regular.ttf */,
+			);
+			path = "Fonts ";
+			sourceTree = "<group>";
+		};
+		1BD8021225DCAFE4009F6EA8 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				1BD8021B25DCB06F009F6EA8 /* Model */,
+				1BD8021325DCAFF1009F6EA8 /* CustomLayout.swift */,
+				1BD8021625DCB007009F6EA8 /* CustomLayoutAttributes.swift */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
+		1BD8021B25DCB06F009F6EA8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1BD8021C25DCB077009F6EA8 /* LayoutItem.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,8 +232,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B952CC125DCEB0400F7AAC2 /* OpenSans-Regular.ttf in Resources */,
 				1B5F5BAC25D08BFA004940A4 /* Main.storyboard in Resources */,
 				1B5F5B9525D0896D004940A4 /* LaunchScreen.storyboard in Resources */,
+				1B952CBE25DCEAF700F7AAC2 /* Merriweather-Bold.ttf in Resources */,
 				1B5F5B9225D0896D004940A4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -207,12 +248,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B5F5B8925D0896D004940A4 /* AppDelegate.swift in Sources */,
-				1B5ADAD625D21D470016A78F /* Colors.swift in Sources */,
+				1BD8021725DCB007009F6EA8 /* CustomLayoutAttributes.swift in Sources */,
+				1BD8021D25DCB077009F6EA8 /* LayoutItem.swift in Sources */,
 				1B5F5BB325D08C87004940A4 /* SearchController.swift in Sources */,
 				1B5F5BB625D08C9C004940A4 /* PostCreatorController.swift in Sources */,
 				1B5F5BA725D08A8D004940A4 /* MainTabController.swift in Sources */,
+				1BD8022025DCB1C3009F6EA8 /* FeedCell.swift in Sources */,
 				1BD801F925DC98AA009F6EA8 /* Extensions.swift in Sources */,
 				1B5F5BB925D08CA8004940A4 /* NotificationsController.swift in Sources */,
+				1BD8021425DCAFF1009F6EA8 /* CustomLayout.swift in Sources */,
 				1B5F5B8B25D0896D004940A4 /* SceneDelegate.swift in Sources */,
 				1B5F5BB025D08C7D004940A4 /* FeedController.swift in Sources */,
 				1B5F5BBC25D08CB2004940A4 /* ProfileController.swift in Sources */,
@@ -357,6 +401,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QSYCFV9MXM;
 				INFOPLIST_FILE = "Way2Earth MVP/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -376,6 +421,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QSYCFV9MXM;
 				INFOPLIST_FILE = "Way2Earth MVP/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

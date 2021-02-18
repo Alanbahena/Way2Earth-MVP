@@ -8,6 +8,16 @@
 import UIKit
 import AVFoundation
 
+extension UIFont {
+    static func merriWeatherBold(size: CGFloat) -> UIFont {
+        return UIFont(name: "Merriweather-Bold", size: size) ?? .systemFont(ofSize: size)
+    }
+    
+    static func openSansRegular(size: CGFloat) -> UIFont {
+        return UIFont(name: "OpenSans-Regular", size: size) ?? .systemFont(ofSize: size)
+    }
+}
+
 extension UIImage {
     /**
      Calculates the best height of the image for available width.
