@@ -17,6 +17,10 @@ extension UIFont {
     static func openSansRegular(size: CGFloat) -> UIFont {
         return UIFont(name: "OpenSans-Regular", size: size) ?? .systemFont(ofSize: size)
     }
+    
+    static func RobotoRegular(size: CGFloat) -> UIFont {
+        return UIFont(name: "Roboto-Regular", size: size) ?? .systemFont(ofSize: size)
+    }
 }
 
 extension UIImage {

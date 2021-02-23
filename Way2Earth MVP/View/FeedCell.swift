@@ -12,6 +12,10 @@ let feedCellIdentifier = "FeedCell"
 
 class FeedCell: UICollectionViewCell {
     
+    
+    //MARK: - Properties
+    
+    
     static let annotationPadding: CGFloat = 11
     
     var imageView: UIImageView = {
@@ -89,14 +93,14 @@ class FeedCell: UICollectionViewCell {
     
     private var likesView: UIView = {
         let likesView = UIView()
-        likesView.backgroundColor = .black
+        likesView.backgroundColor = UIColor.spaceColor
         likesView.layer.cornerRadius = 5
         return likesView
     }()
     
     private var commentsView: UIView = {
         let commentsView = UIView()
-        commentsView.backgroundColor = .black
+        commentsView.backgroundColor = UIColor.spaceColor
         commentsView.layer.cornerRadius = 5
         return commentsView
     }()
@@ -105,10 +109,10 @@ class FeedCell: UICollectionViewCell {
         let likesLabel = UILabel()
         likesLabel.numberOfLines = 1
         likesLabel.textColor = .white
-        likesLabel.font = .systemFont(ofSize: 8)
+        likesLabel.font = UIFont.RobotoRegular(size: 8)
         likesLabel.text = "255"
         likesLabel.textAlignment = .center
-        likesLabel.addCharacterSpacing(kernValue: -1.0)
+        likesLabel.addCharacterSpacing(kernValue: -0.8)
         return likesLabel
     }()
     
@@ -116,10 +120,10 @@ class FeedCell: UICollectionViewCell {
         let commentLabel = UILabel()
         commentLabel.numberOfLines = 1
         commentLabel.textColor = .white
-        commentLabel.font = .systemFont(ofSize: 8)
+        commentLabel.font = UIFont.RobotoRegular(size: 8)
         commentLabel.text = "45"
         commentLabel.textAlignment = .center
-        commentLabel.addCharacterSpacing(kernValue: -1.0)
+        commentLabel.addCharacterSpacing(kernValue: -0.8)
         return commentLabel
     }()
     
@@ -139,7 +143,7 @@ class FeedCell: UICollectionViewCell {
     
     
     
-    
+    //MARK: - Lifecycle
         
         
     override init(frame: CGRect) {
@@ -189,8 +193,6 @@ class FeedCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
 }
 
     //MARK: - Constraints

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1B15555925E4D31100934965 /* hello.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B15555825E4D31100934965 /* hello.swift */; };
 		1B5F5B8925D0896D004940A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5F5B8825D0896D004940A4 /* AppDelegate.swift */; };
 		1B5F5B8B25D0896D004940A4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5F5B8A25D0896D004940A4 /* SceneDelegate.swift */; };
 		1B5F5B9225D0896D004940A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B5F5B9125D0896D004940A4 /* Assets.xcassets */; };
@@ -26,10 +25,10 @@
 		1BD8021725DCB007009F6EA8 /* CustomLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8021625DCB007009F6EA8 /* CustomLayoutAttributes.swift */; };
 		1BD8021D25DCB077009F6EA8 /* LayoutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8021C25DCB077009F6EA8 /* LayoutItem.swift */; };
 		1BD8022025DCB1C3009F6EA8 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8021F25DCB1C3009F6EA8 /* FeedCell.swift */; };
+		1BF204B325E5508B00A49867 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1BF204B225E5508B00A49867 /* Roboto-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1B15555825E4D31100934965 /* hello.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hello.swift; sourceTree = "<group>"; };
 		1B5F5B8525D0896D004940A4 /* Way2Earth MVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Way2Earth MVP.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B5F5B8825D0896D004940A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B5F5B8A25D0896D004940A4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -50,6 +49,7 @@
 		1BD8021625DCB007009F6EA8 /* CustomLayoutAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLayoutAttributes.swift; sourceTree = "<group>"; };
 		1BD8021C25DCB077009F6EA8 /* LayoutItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutItem.swift; sourceTree = "<group>"; };
 		1BD8021F25DCB1C3009F6EA8 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
+		1BF204B225E5508B00A49867 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +66,6 @@
 		1B5F5B7C25D0896D004940A4 = {
 			isa = PBXGroup;
 			children = (
-				1B15555825E4D31100934965 /* hello.swift */,
 				1B5F5B8725D0896D004940A4 /* Way2Earth MVP */,
 				1B5F5B8625D0896D004940A4 /* Products */,
 			);
@@ -156,6 +155,7 @@
 			children = (
 				1B952CBD25DCEAF700F7AAC2 /* Merriweather-Bold.ttf */,
 				1B952CC025DCEB0400F7AAC2 /* OpenSans-Regular.ttf */,
+				1BF204B225E5508B00A49867 /* Roboto-Regular.ttf */,
 			);
 			path = "Fonts ";
 			sourceTree = "<group>";
@@ -236,6 +236,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BF204B325E5508B00A49867 /* Roboto-Regular.ttf in Resources */,
 				1B952CC125DCEB0400F7AAC2 /* OpenSans-Regular.ttf in Resources */,
 				1B5F5BAC25D08BFA004940A4 /* Main.storyboard in Resources */,
 				1B5F5B9525D0896D004940A4 /* LaunchScreen.storyboard in Resources */,
@@ -251,7 +252,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B15555925E4D31100934965 /* hello.swift in Sources */,
 				1B5F5B8925D0896D004940A4 /* AppDelegate.swift in Sources */,
 				1BD8021725DCB007009F6EA8 /* CustomLayoutAttributes.swift in Sources */,
 				1BD8021D25DCB077009F6EA8 /* LayoutItem.swift in Sources */,
