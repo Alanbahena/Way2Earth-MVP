@@ -3,6 +3,7 @@
 //  Way2Earth MVP
 //
 //  Created by Alan Bahena on 2/7/21.
+//  Copyright © 2021 Alan Bahena. All rights reserved.
 //
 
 import UIKit
@@ -21,9 +22,9 @@ class MainTabController: UITabBarController {
     func configureViewController() {
         
         let layout = CustomLayout()
-        let feed = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "Home_unselected"), selectedImage: #imageLiteral(resourceName: "Home_selected "), rootViewController: FeedController(collectionViewLayout: layout))
+        let feed = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "NewsFeed_unselected"), selectedImage: #imageLiteral(resourceName: "NewsFeed_selected "), rootViewController: FeedController(collectionViewLayout: layout))
         let search = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "Search_unselected"), selectedImage: #imageLiteral(resourceName: "Search_selected"), rootViewController: SearchController())
-        let postCreator = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "Create"), selectedImage:#imageLiteral(resourceName: "Create"), rootViewController: PostCreatorController())
+        let postCreator = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "Create_unselected"), selectedImage:#imageLiteral(resourceName: "Create_unselected"), rootViewController: PostCreatorController())
         let notifications = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "Notifications_unselected"), selectedImage: #imageLiteral(resourceName: "Notifications_selected"), rootViewController: NotificationsController())
         let profile = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "Profile_unselected"), selectedImage: #imageLiteral(resourceName: "Profile_selected"), rootViewController: ProfileController())
         

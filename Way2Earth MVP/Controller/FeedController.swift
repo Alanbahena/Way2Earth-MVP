@@ -3,6 +3,7 @@
 //  Way2Earth MVP
 //
 //  Created by Alan Bahena on 2/7/21.
+//  Copyright © 2021 Alan Bahena. All rights reserved.
 //
 import Foundation
 import UIKit
@@ -76,7 +77,7 @@ extension FeedController: CustomDelegate {
         let userTextFont = UIFont.openSansRegular(size: 8)
         let userTextHeight = userText.heightForWidth(width: withWidth, font: userTextFont)
         
-        return FeedCell.annotationPadding * 2 + titleTextHeight + 2 + userTextHeight
+        return titleTextHeight + userTextHeight + FeedCell.annotationPadding
     }
 }
 
@@ -89,14 +90,9 @@ extension FeedController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: feedCellIdentifier, for: indexPath) as! FeedCell
-        
-        
         let item = items[indexPath.item]
+        
         cell.imageView.image = item.image
-        cell.titleTextLabel.text = item.titleText
-        cell.profileImageView.image = item.profileImage
-        cell.userText.text = item.userText
-        cell.postTime.text = item.postTime
         
         return cell
     }

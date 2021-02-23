@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Notifications_unselected.png",
+      "filename" : "LikesIcon.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Notifications_unselected@2x.png",
+      "filename" : "LikesIcon@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Notifications_unselected@3x.png",
+      "filename" : "LikesIcon@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
