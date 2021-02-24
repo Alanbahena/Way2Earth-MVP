@@ -18,6 +18,7 @@
 		1B5F5BB625D08C9C004940A4 /* PostCreatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5F5BB525D08C9C004940A4 /* PostCreatorController.swift */; };
 		1B5F5BB925D08CA8004940A4 /* NotificationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5F5BB825D08CA8004940A4 /* NotificationsController.swift */; };
 		1B5F5BBC25D08CB2004940A4 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5F5BBB25D08CB2004940A4 /* ProfileController.swift */; };
+		1B749AA325E6D793005C8498 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B749AA225E6D793005C8498 /* AuthenticationViewModel.swift */; };
 		1B952CBE25DCEAF700F7AAC2 /* Merriweather-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B952CBD25DCEAF700F7AAC2 /* Merriweather-Bold.ttf */; };
 		1B952CC125DCEB0400F7AAC2 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B952CC025DCEB0400F7AAC2 /* OpenSans-Regular.ttf */; };
 		1BD801F925DC98AA009F6EA8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD801F825DC98AA009F6EA8 /* Extensions.swift */; };
@@ -26,6 +27,11 @@
 		1BD8021D25DCB077009F6EA8 /* LayoutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8021C25DCB077009F6EA8 /* LayoutItem.swift */; };
 		1BD8022025DCB1C3009F6EA8 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8021F25DCB1C3009F6EA8 /* FeedCell.swift */; };
 		1BF204B325E5508B00A49867 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1BF204B225E5508B00A49867 /* Roboto-Regular.ttf */; };
+		1BF204B725E554E000A49867 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF204B625E554E000A49867 /* LoginController.swift */; };
+		1BF204BB25E554F000A49867 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF204BA25E554F000A49867 /* RegistrationController.swift */; };
+		1BF204BE25E5A83600A49867 /* WelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF204BD25E5A83600A49867 /* WelcomeController.swift */; };
+		1BF204C225E5F9E900A49867 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1BF204C125E5F9E900A49867 /* Roboto-Bold.ttf */; };
+		1BF204C525E5FC2200A49867 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF204C425E5FC2200A49867 /* CustomTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +48,7 @@
 		1B5F5BB525D08C9C004940A4 /* PostCreatorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreatorController.swift; sourceTree = "<group>"; };
 		1B5F5BB825D08CA8004940A4 /* NotificationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsController.swift; sourceTree = "<group>"; };
 		1B5F5BBB25D08CB2004940A4 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		1B749AA225E6D793005C8498 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		1B952CBD25DCEAF700F7AAC2 /* Merriweather-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Bold.ttf"; sourceTree = "<group>"; };
 		1B952CC025DCEB0400F7AAC2 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		1BD801F825DC98AA009F6EA8 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -50,6 +57,11 @@
 		1BD8021C25DCB077009F6EA8 /* LayoutItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutItem.swift; sourceTree = "<group>"; };
 		1BD8021F25DCB1C3009F6EA8 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		1BF204B225E5508B00A49867 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		1BF204B625E554E000A49867 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		1BF204BA25E554F000A49867 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
+		1BF204BD25E5A83600A49867 /* WelcomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeController.swift; sourceTree = "<group>"; };
+		1BF204C125E5F9E900A49867 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		1BF204C425E5FC2200A49867 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +130,7 @@
 		1B5F5BA125D08A07004940A4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1BF204B525E554CE00A49867 /* Authentication  */,
 				1B5F5BA625D08A8D004940A4 /* MainTabController.swift */,
 				1B5F5BAF25D08C7D004940A4 /* FeedController.swift */,
 				1B5F5BB225D08C87004940A4 /* SearchController.swift */,
@@ -131,6 +144,7 @@
 		1B5F5BA225D08A09004940A4 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				1B749AA225E6D793005C8498 /* AuthenticationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -139,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				1BD8021F25DCB1C3009F6EA8 /* FeedCell.swift */,
+				1BF204C425E5FC2200A49867 /* CustomTextField.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -156,6 +171,7 @@
 				1B952CBD25DCEAF700F7AAC2 /* Merriweather-Bold.ttf */,
 				1B952CC025DCEB0400F7AAC2 /* OpenSans-Regular.ttf */,
 				1BF204B225E5508B00A49867 /* Roboto-Regular.ttf */,
+				1BF204C125E5F9E900A49867 /* Roboto-Bold.ttf */,
 			);
 			path = "Fonts ";
 			sourceTree = "<group>";
@@ -176,6 +192,16 @@
 				1BD8021C25DCB077009F6EA8 /* LayoutItem.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		1BF204B525E554CE00A49867 /* Authentication  */ = {
+			isa = PBXGroup;
+			children = (
+				1BF204BD25E5A83600A49867 /* WelcomeController.swift */,
+				1BF204B625E554E000A49867 /* LoginController.swift */,
+				1BF204BA25E554F000A49867 /* RegistrationController.swift */,
+			);
+			path = "Authentication ";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,6 +262,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BF204C225E5F9E900A49867 /* Roboto-Bold.ttf in Resources */,
 				1BF204B325E5508B00A49867 /* Roboto-Regular.ttf in Resources */,
 				1B952CC125DCEB0400F7AAC2 /* OpenSans-Regular.ttf in Resources */,
 				1B5F5BAC25D08BFA004940A4 /* Main.storyboard in Resources */,
@@ -254,17 +281,22 @@
 			files = (
 				1B5F5B8925D0896D004940A4 /* AppDelegate.swift in Sources */,
 				1BD8021725DCB007009F6EA8 /* CustomLayoutAttributes.swift in Sources */,
+				1BF204BE25E5A83600A49867 /* WelcomeController.swift in Sources */,
 				1BD8021D25DCB077009F6EA8 /* LayoutItem.swift in Sources */,
 				1B5F5BB325D08C87004940A4 /* SearchController.swift in Sources */,
 				1B5F5BB625D08C9C004940A4 /* PostCreatorController.swift in Sources */,
+				1B749AA325E6D793005C8498 /* AuthenticationViewModel.swift in Sources */,
 				1B5F5BA725D08A8D004940A4 /* MainTabController.swift in Sources */,
 				1BD8022025DCB1C3009F6EA8 /* FeedCell.swift in Sources */,
+				1BF204C525E5FC2200A49867 /* CustomTextField.swift in Sources */,
 				1BD801F925DC98AA009F6EA8 /* Extensions.swift in Sources */,
 				1B5F5BB925D08CA8004940A4 /* NotificationsController.swift in Sources */,
 				1BD8021425DCAFF1009F6EA8 /* CustomLayout.swift in Sources */,
 				1B5F5B8B25D0896D004940A4 /* SceneDelegate.swift in Sources */,
 				1B5F5BB025D08C7D004940A4 /* FeedController.swift in Sources */,
 				1B5F5BBC25D08CB2004940A4 /* ProfileController.swift in Sources */,
+				1BF204BB25E554F000A49867 /* RegistrationController.swift in Sources */,
+				1BF204B725E554E000A49867 /* LoginController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

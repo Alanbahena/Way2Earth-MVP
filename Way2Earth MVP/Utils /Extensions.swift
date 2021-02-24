@@ -9,6 +9,18 @@
 import UIKit
 import AVFoundation
 
+extension UIButton {
+    func attributedTittle(firstPart : String, secondPart: String){
+        let atts: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(white: 1, alpha: 0.9), .font: UIFont.RobotoRegular(size: 16)]
+        let attributedTitle = NSMutableAttributedString(string: "\(firstPart)  ", attributes: atts)
+        
+        let boldAtts: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(white: 1, alpha: 0.9), .font: UIFont.robotoBold(size: 16)]
+        attributedTitle.append(NSAttributedString(string: secondPart, attributes: boldAtts))
+        
+        setAttributedTitle(attributedTitle, for: .normal)
+    }
+}
+
 extension UIFont {
     static func merriWeatherBold(size: CGFloat) -> UIFont {
         return UIFont(name: "Merriweather-Bold", size: size) ?? .systemFont(ofSize: size)
@@ -20,6 +32,10 @@ extension UIFont {
     
     static func RobotoRegular(size: CGFloat) -> UIFont {
         return UIFont(name: "Roboto-Regular", size: size) ?? .systemFont(ofSize: size)
+    }
+    
+    static func robotoBold(size: CGFloat) -> UIFont {
+        return UIFont(name: "Roboto-Bold", size: size) ?? .systemFont(ofSize: size)
     }
 }
 
@@ -47,6 +63,18 @@ extension UIColor {
     
     class var spaceColor: UIColor {
         return UIColor(red: 7.0 / 255.0 , green: 9.0 / 255.0 , blue: 13.0 / 255.0 , alpha: 0.9)
+    }
+    
+    class var placeHolderSpaceColor: UIColor {
+        return UIColor(red: 7.0 / 255.0 , green: 9.0 / 255.0 , blue: 13.0 / 255.0 , alpha: 0.7)
+    }
+    
+    class var buttonbackgroundBlueColor: UIColor {
+        return UIColor(red: 5.0 / 255.0 , green: 131.0 / 255.0 , blue: 242.0 / 255.0 , alpha: 0.75)
+    }
+    
+    class var buttonUnabledbackgroundBlueColor: UIColor {
+        return UIColor(red: 5.0 / 255.0 , green: 131.0 / 255.0 , blue: 242.0 / 255.0 , alpha: 0.25)
     }
 }
 
