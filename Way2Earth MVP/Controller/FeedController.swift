@@ -5,8 +5,9 @@
 //  Created by Alan Bahena on 2/7/21.
 //  Copyright © 2021 Alan Bahena. All rights reserved.
 //
-import Foundation
+
 import UIKit
+import Firebase
 
 protocol CustomDelegate: class {
     func collectionView(collectionView: UICollectionView, heightForImageAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat
@@ -26,21 +27,35 @@ class FeedController: UICollectionViewController {
     
     //MARK: - Lifecycle
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        navigationController?.setNavigationBarHidden(true, animated: animated)
+//    }
+//
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        navigationController?.setNavigationBarHidden(false, animated: animated)
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureUI()
         
+    }
+    
+    //MARK: - Actions
+
+    @objc func handleLogOut() {
+        do {
+            try Auth.auth().signOut()
+            let controller = WelcomeController()
+            let nav = UINavigationController(rootViewController: controller)
+            nav.modalPresentationStyle = .fullScreen
+            present(nav, animated: false, completion: nil)
+        } catch {
+            print("DEBUG: Failed to sign out")
+        }
     }
     
     //MARK: - Helpers
@@ -53,8 +68,11 @@ class FeedController: UICollectionViewController {
         collectionView.register(FeedCell.self, forCellWithReuseIdentifier: feedCellIdentifier)
         collectionView.contentInset = UIEdgeInsets(top: 15, left: 5, bottom: 5, right: 5)
         collectionView.backgroundColor = UIColor.spaceColor
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "LogOut", style: .plain, target: self, action: #selector(handleLogOut))
     }
 }
+
 
     //MARK: - CustomDelegate
 

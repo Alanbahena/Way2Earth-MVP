@@ -70,12 +70,12 @@ class WelcomeController: UIViewController {
     
     @objc func handleShowLogIn() {
         let controller = LoginController()
-        navigationController?.pushViewController(controller, animated: true)
+        navigationController?.pushViewController(controller, animated: false)
     }
     
     @objc func handleShowSignUp() {
         let controller = RegistrationController()
-        navigationController?.pushViewController(controller, animated: true)
+        navigationController?.pushViewController(controller, animated: false)
     }
     
     

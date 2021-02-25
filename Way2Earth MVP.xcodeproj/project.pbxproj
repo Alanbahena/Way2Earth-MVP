@@ -3,10 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0DD4F19011A2597237248192 /* Pods_Way2Earth_MVP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D485DC39830BFE37C86F22D9 /* Pods_Way2Earth_MVP.framework */; };
+		1B1EEE4E25E74437006694D9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B1EEE4D25E74437006694D9 /* GoogleService-Info.plist */; };
+		1B1EEE5225E745D9006694D9 /* ImageUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1EEE5125E745D9006694D9 /* ImageUploader.swift */; };
+		1B1EEE5525E745E3006694D9 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B1EEE5425E745E3006694D9 /* AuthService.swift */; };
 		1B5F5B8925D0896D004940A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5F5B8825D0896D004940A4 /* AppDelegate.swift */; };
 		1B5F5B8B25D0896D004940A4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5F5B8A25D0896D004940A4 /* SceneDelegate.swift */; };
 		1B5F5B9225D0896D004940A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B5F5B9125D0896D004940A4 /* Assets.xcassets */; };
@@ -35,6 +39,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		08C99C85635BF7185ACC1535 /* Pods-Way2Earth MVP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Way2Earth MVP.debug.xcconfig"; path = "Target Support Files/Pods-Way2Earth MVP/Pods-Way2Earth MVP.debug.xcconfig"; sourceTree = "<group>"; };
+		1B1EEE4D25E74437006694D9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1B1EEE5125E745D9006694D9 /* ImageUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploader.swift; sourceTree = "<group>"; };
+		1B1EEE5425E745E3006694D9 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		1B5F5B8525D0896D004940A4 /* Way2Earth MVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Way2Earth MVP.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B5F5B8825D0896D004940A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B5F5B8A25D0896D004940A4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +70,8 @@
 		1BF204BD25E5A83600A49867 /* WelcomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeController.swift; sourceTree = "<group>"; };
 		1BF204C125E5F9E900A49867 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		1BF204C425E5FC2200A49867 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		81BF6B3F6D0EDFE098C0F2AE /* Pods-Way2Earth MVP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Way2Earth MVP.release.xcconfig"; path = "Target Support Files/Pods-Way2Earth MVP/Pods-Way2Earth MVP.release.xcconfig"; sourceTree = "<group>"; };
+		D485DC39830BFE37C86F22D9 /* Pods_Way2Earth_MVP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Way2Earth_MVP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DD4F19011A2597237248192 /* Pods_Way2Earth_MVP.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +91,8 @@
 			children = (
 				1B5F5B8725D0896D004940A4 /* Way2Earth MVP */,
 				1B5F5B8625D0896D004940A4 /* Products */,
+				2C86D2DB1A22839D0CC57477 /* Pods */,
+				4A282D01C8CDDF69D08D7D55 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,6 +119,7 @@
 				1B5F5B9325D0896D004940A4 /* LaunchScreen.storyboard */,
 				1B5F5BAB25D08BFA004940A4 /* Main.storyboard */,
 				1B5F5B9625D0896D004940A4 /* Info.plist */,
+				1B1EEE4D25E74437006694D9 /* GoogleService-Info.plist */,
 			);
 			path = "Way2Earth MVP";
 			sourceTree = "<group>";
@@ -123,6 +137,8 @@
 		1B5F5BA025D08A05004940A4 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				1B1EEE5125E745D9006694D9 /* ImageUploader.swift */,
+				1B1EEE5425E745E3006694D9 /* AuthService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -204,6 +220,23 @@
 			path = "Authentication ";
 			sourceTree = "<group>";
 		};
+		2C86D2DB1A22839D0CC57477 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				08C99C85635BF7185ACC1535 /* Pods-Way2Earth MVP.debug.xcconfig */,
+				81BF6B3F6D0EDFE098C0F2AE /* Pods-Way2Earth MVP.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		4A282D01C8CDDF69D08D7D55 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D485DC39830BFE37C86F22D9 /* Pods_Way2Earth_MVP.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -211,9 +244,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B5F5B9925D0896D004940A4 /* Build configuration list for PBXNativeTarget "Way2Earth MVP" */;
 			buildPhases = (
+				7D5D6856D773517DE114D593 /* [CP] Check Pods Manifest.lock */,
 				1B5F5B8125D0896D004940A4 /* Sources */,
 				1B5F5B8225D0896D004940A4 /* Frameworks */,
 				1B5F5B8325D0896D004940A4 /* Resources */,
+				5692DE90523B73FD53AEB2C1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -262,6 +297,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B1EEE4E25E74437006694D9 /* GoogleService-Info.plist in Resources */,
 				1BF204C225E5F9E900A49867 /* Roboto-Bold.ttf in Resources */,
 				1BF204B325E5508B00A49867 /* Roboto-Regular.ttf in Resources */,
 				1B952CC125DCEB0400F7AAC2 /* OpenSans-Regular.ttf in Resources */,
@@ -274,6 +310,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5692DE90523B73FD53AEB2C1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Way2Earth MVP/Pods-Way2Earth MVP-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Way2Earth MVP/Pods-Way2Earth MVP-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Way2Earth MVP/Pods-Way2Earth MVP-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7D5D6856D773517DE114D593 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Way2Earth MVP-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1B5F5B8125D0896D004940A4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -283,8 +361,10 @@
 				1BD8021725DCB007009F6EA8 /* CustomLayoutAttributes.swift in Sources */,
 				1BF204BE25E5A83600A49867 /* WelcomeController.swift in Sources */,
 				1BD8021D25DCB077009F6EA8 /* LayoutItem.swift in Sources */,
+				1B1EEE5225E745D9006694D9 /* ImageUploader.swift in Sources */,
 				1B5F5BB325D08C87004940A4 /* SearchController.swift in Sources */,
 				1B5F5BB625D08C9C004940A4 /* PostCreatorController.swift in Sources */,
+				1B1EEE5525E745E3006694D9 /* AuthService.swift in Sources */,
 				1B749AA325E6D793005C8498 /* AuthenticationViewModel.swift in Sources */,
 				1B5F5BA725D08A8D004940A4 /* MainTabController.swift in Sources */,
 				1BD8022025DCB1C3009F6EA8 /* FeedCell.swift in Sources */,
@@ -432,6 +512,7 @@
 		};
 		1B5F5B9A25D0896D004940A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08C99C85635BF7185ACC1535 /* Pods-Way2Earth MVP.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -452,6 +533,7 @@
 		};
 		1B5F5B9B25D0896D004940A4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 81BF6B3F6D0EDFE098C0F2AE /* Pods-Way2Earth MVP.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

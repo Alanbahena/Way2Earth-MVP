@@ -12,7 +12,8 @@ class RegistrationController: UIViewController {
     
     //MARK: - Properties
     
-    private var viewModel = RegistrationViewModel() 
+    private var viewModel = RegistrationViewModel()
+    private var profileImage: UIImage?
     
     private let viewBackground:UIImageView = {
         let viewBackground = UIImageView(image: #imageLiteral(resourceName: "earth"))
@@ -54,7 +55,8 @@ class RegistrationController: UIViewController {
         button.backgroundColor = .buttonUnabledbackgroundBlueColor
         button.layer.cornerRadius = 10
         button.setHeight(45)
-        button.isEnabled = false 
+        button.isEnabled = false
+        button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
         return button
     }()
     
@@ -80,7 +82,7 @@ class RegistrationController: UIViewController {
     
     @objc func handleShowLogIn() {
         let controller = LoginController()
-        navigationController?.pushViewController(controller, animated: true)
+        navigationController?.pushViewController(controller, animated: false)
     }
     
     @objc func textDidChange(sender: UITextField) {
@@ -102,6 +104,24 @@ class RegistrationController: UIViewController {
         picker.allowsEditing = true
         
         present(picker, animated: true, completion: nil)
+    }
+    
+    @objc func handleSignUp() {
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        guard let fullName = fullNameTextField.text else { return }
+        guard let userName = userNameTextField.text?.lowercased() else { return }
+        guard let profileImage = self.profileImage else { return }
+        
+        let credentials = AuthCredentials(email: email, password: password, fullName: fullName, userName: "@\(userName)", profileImage: profileImage)
+        
+        AuthService.registerUser(withCredentials: credentials) { error in
+            if let error = error {
+                print ("DEBUG: Failed to register user \(error.localizedDescription)")
+                return
+            }
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     //MARK: - Helpers
@@ -153,6 +173,7 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let selectedImage = info[.editedImage] as? UIImage else { return }
+        profileImage = selectedImage
         
         plusPhotoButton.layer.cornerRadius = plusPhotoButton.frame.width / 2
         plusPhotoButton.layer.masksToBounds = true
