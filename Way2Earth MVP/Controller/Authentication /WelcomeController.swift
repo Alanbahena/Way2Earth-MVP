@@ -11,6 +11,8 @@ class WelcomeController: UIViewController {
     
     //MARK: - Properties
     
+ 
+    
     private let viewBackground:UIImageView = {
         let viewBackground = UIImageView(image: #imageLiteral(resourceName: "astronaut"))
         viewBackground.clipsToBounds = true

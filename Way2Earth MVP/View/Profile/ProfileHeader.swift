@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 let profileHeaderIdentifier = "ProfileCell"
 
@@ -14,32 +15,36 @@ class ProfileHeader: UICollectionReusableView {
  
     //MARK: - Properties
     
+    var viewModel: ProfileHeaderViewModel? {
+        didSet { configure() }
+    }
+    
+    weak var delegate: HeaderDelegate?
+    
     var profileBackgroundImage: UIImageView = {
         let profileBI = UIImageView()
-        profileBI.backgroundColor = .white
+        profileBI.backgroundColor = .lightGray
         profileBI.contentMode = .scaleToFill
-        profileBI.image = #imageLiteral(resourceName: "profileBackground")
+//        profileBI.image = #imageLiteral(resourceName: "profileBackground")
         return profileBI
     }()
     
-    var profileImageView: UIImageView = {
+    private let profileImageView: UIImageView = {
         let profileImage = UIImageView()
         profileImage.contentMode = .scaleAspectFill
         profileImage.layer.masksToBounds = true
-        profileImage.backgroundColor = .white
+        profileImage.backgroundColor = .lightGray
         profileImage.layer.borderWidth = 3
         profileImage.layer.borderColor = UIColor.white.cgColor
-        profileImage.image = #imageLiteral(resourceName: "profileImage")
         return profileImage
     }()
     
-    private var profileNameLabel: UILabel = {
+    private let profileNameLabel: UILabel = {
         let profileNameLabel = UILabel()
         profileNameLabel.font = UIFont.robotoBold(size: 20)
         profileNameLabel.sizeToFit()
         profileNameLabel.numberOfLines = 1
         profileNameLabel.textColor = .white
-        profileNameLabel.text = "The Bohemian Traveler"
         profileNameLabel.textAlignment = .center
         return profileNameLabel
     }()
@@ -51,7 +56,6 @@ class ProfileHeader: UICollectionReusableView {
         userName.numberOfLines = 1
         userName.textColor = .white
         userName.textAlignment = .center
-        userName.text = "@theboheminatraveler"
         return userName
     }()
     
@@ -62,7 +66,8 @@ class ProfileHeader: UICollectionReusableView {
         dl.numberOfLines = 0
         dl.textColor = .white
         dl.textAlignment = .center
-        dl.text = "A person who loves to travel. The sky is not the limit"
+//        dl.text = "A person who loves to travel. The sky is not the limit"
+        dl.text = ""
         return dl
     }()
     
@@ -159,10 +164,17 @@ class ProfileHeader: UICollectionReusableView {
     //MARK: - Actions
     
     @objc func handleEditProfileFollowTapped() {
-        print("Edit profile tapped ..")
+        delegate?.didTapEdit()
     }
     
     //MARK: - Helpers
+    
+    func configure() {
+        guard let  viewModel = viewModel else { return }
+        profileNameLabel.text = viewModel.profileNameLabel
+        profileImageView.sd_setImage(with: viewModel.profileImageUrl)
+        userNameLabel.text = viewModel.userName
+    }
     
     func attributedStatText(value: Int, label: String) -> NSAttributedString {
         let attributedtext = NSMutableAttributedString(string: "\(value)\n", attributes: [.font: UIFont.robotoBold(size: 14), .foregroundColor: UIColor.white])
