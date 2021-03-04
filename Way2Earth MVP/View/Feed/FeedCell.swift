@@ -46,7 +46,7 @@ class FeedCell: UICollectionViewCell {
         label.sizeToFit()
         label.numberOfLines = 2
         label.textColor = .white
-        label.text = "Hello World today we have achieved something pretty muhc amazing! "
+        label.text = "hello World"
         return label
     }()
     
@@ -149,45 +149,76 @@ class FeedCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        //Adding VerticalStackView
-        addVerticalStackViewConstraint()
+        //VerticalStackView
+        contentView.addSubview(verticalStackView)
+        verticalStackView.frame = contentView.frame
         
-        //AnnotationView Constraint
-        addAnnotationViewConstraint()
+        //AnnotationView
+        let titleTextLabelHeight = titleTextLabel.text?.heightForWidth(width: contentView.bounds.width, font: .systemFont(ofSize: 10))
+        let userTextLabelHeight = userTextLabel.text?.heightForWidth(width: contentView.bounds.width, font: .systemFont(ofSize: 8))
+        annotationView.translatesAutoresizingMaskIntoConstraints = false
+        annotationView.anchor(top: imageView.bottomAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor)
+        titleTextLabelHeight! > 24 ? annotationView.setHeight(24 + userTextLabelHeight! + 11) : annotationView.setHeight(titleTextLabelHeight! + userTextLabelHeight! + 11)
         
-        //ProfileImageView Constraint
-        addProfileImageViewConstraint()
+        //Profile Image
+        annotationView.addSubview(profileImageView)
+        profileImageView.translatesAutoresizingMaskIntoConstraints = false
+        profileImageView.anchor(top: imageView.bottomAnchor, left: contentView.leftAnchor, paddingTop: 6, paddingLeft: 5)
+        profileImageView.setDimensions(height: 20, width: 20)
+        profileImageView.layer.cornerRadius = 20/2
         
         //TitleTextLabel
-        titleTextLabelConstraint()
+        annotationView.addSubview(titleTextLabel)
+        titleTextLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleTextLabel.anchor(top: annotationView.topAnchor, left: profileImageView.rightAnchor, right: contentView.rightAnchor, paddingTop: 5, paddingLeft: 5, paddingBottom: 10, paddingRight: 5)
         
         //PostTimeLabel
-        addPostTimeLabelConstraint()
+        annotationView.addSubview(postTimeLabel)
+        postTimeLabel.translatesAutoresizingMaskIntoConstraints = false
+        postTimeLabel.anchor(top: titleTextLabel.bottomAnchor, right: annotationView.rightAnchor, paddingTop: 1, paddingBottom: 5, paddingRight: 5)
+        postTimeLabel.setWidth(53)
         
         //UserTextLabel
-        addUserTextConstraint()
+        annotationView.addSubview(userTextLabel)
+        userTextLabel.translatesAutoresizingMaskIntoConstraints = false
+        userTextLabel.anchor(top: titleTextLabel.bottomAnchor, left: titleTextLabel.leftAnchor, right: postTimeLabel.leftAnchor, paddingTop: 1, paddingBottom: 5, paddingRight: 6)
         
-        //horizontalStack
-        addhorizontalStackViewConstraint()
+        //HorizontalStackView
+        contentView.addSubview(horizontalStack)
+        horizontalStack.translatesAutoresizingMaskIntoConstraints = false
+        horizontalStack.anchor(top: contentView.topAnchor, right: contentView.rightAnchor, paddingTop: 10, paddingRight: 5)
+        horizontalStack.setDimensions(height: 13, width: 69)
         
         //LikesView
-        addLikesViewConstraint()
+        likesView.setDimensions(height: 13, width: 32)
         
-        //commentsView
-        addCommentsViewConstraint()
+        //CommentsView
+        commentsView.setDimensions(height: 13, width: 32)
         
-        //likesLabel
-        addLikesLabelConstraint()
+        //LikesLabel
+        likesView.addSubview(likesLabel)
+        likesLabel.translatesAutoresizingMaskIntoConstraints = false
+        likesLabel.anchor(top: likesView.topAnchor, left: likesView.leftAnchor, paddingTop: 2, paddingLeft: 4)
+        likesLabel.setWidth(15)
         
-        //LikesIcon
-        addLikesIconConstraint()
+        //LikesICon
+        likesView.addSubview(likesIcon)
+        likesIcon.translatesAutoresizingMaskIntoConstraints = false
+        likesIcon.anchor(top: likesView.topAnchor, right: likesView.rightAnchor, paddingTop: 2, paddingRight: 4)
+        likesIcon.setDimensions(height: 8, width: 8)
         
         //CommentLabel
-        addCommentLabel()
+        commentsView.addSubview(commentLabel)
+        commentLabel.translatesAutoresizingMaskIntoConstraints = false
+        commentLabel.anchor(top: commentsView.topAnchor, left: commentsView.leftAnchor, paddingTop: 2, paddingLeft: 4)
+        commentLabel.setWidth(15)
         
         //CommentIcon
-        addcommentIcon()
-        
+        commentsView.addSubview(commentIcon)
+        commentIcon.translatesAutoresizingMaskIntoConstraints = false
+        commentIcon.anchor(top: commentsView.topAnchor, right: commentsView.rightAnchor, paddingTop: 3, paddingRight: 3)
+        commentIcon.setDimensions(height: 8, width: 8)
+       
     }
     
     required init?(coder: NSCoder) {
@@ -195,89 +226,4 @@ class FeedCell: UICollectionViewCell {
     }
 }
 
-    //MARK: - Constraints
-    
-extension FeedCell {
-    
-    func addProfileImageViewConstraint() {
-        annotationView.addSubview(profileImageView)
-        profileImageView.translatesAutoresizingMaskIntoConstraints = false
-        profileImageView.anchor(top: imageView.bottomAnchor, left: contentView.leftAnchor, paddingTop: 6, paddingLeft: 5)
-        profileImageView.setDimensions(height: 20, width: 20)
-        profileImageView.layer.cornerRadius = 20/2
-    }
-    
-    func addVerticalStackViewConstraint () {
-        contentView.addSubview(verticalStackView)
-        verticalStackView.frame = contentView.frame
-    }
-    
-    func addAnnotationViewConstraint() {
-        let titleTextLabelHeight = titleTextLabel.text?.heightForWidth(width: contentView.bounds.width, font: .systemFont(ofSize: 10))
-        let userTextLabelHeight = userTextLabel.text?.heightForWidth(width: contentView.bounds.width, font: .systemFont(ofSize: 8))
-        
-        annotationView.anchor(top: imageView.bottomAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor)
-        annotationView.setHeight(titleTextLabelHeight! + userTextLabelHeight!)
-    }
-    
-    func titleTextLabelConstraint () {
-        annotationView.addSubview(titleTextLabel)
-        titleTextLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleTextLabel.anchor(top: annotationView.topAnchor, left: profileImageView.rightAnchor, right: contentView.rightAnchor, paddingTop: 5, paddingLeft: 5, paddingBottom: 10, paddingRight: 5)
-    }
-    
-    func addUserTextConstraint () {
-        annotationView.addSubview(userTextLabel)
-        userTextLabel.translatesAutoresizingMaskIntoConstraints = false
-        userTextLabel.anchor(top: titleTextLabel.bottomAnchor, left: titleTextLabel.leftAnchor, right: postTimeLabel.leftAnchor, paddingTop: 1, paddingBottom: 5, paddingRight: 6)
-    }
-    
-    func addPostTimeLabelConstraint() {
-        annotationView.addSubview(postTimeLabel)
-        postTimeLabel.translatesAutoresizingMaskIntoConstraints = false
-        postTimeLabel.anchor(top: titleTextLabel.bottomAnchor, right: annotationView.rightAnchor, paddingTop: 1, paddingBottom: 5, paddingRight: 5)
-        postTimeLabel.setWidth(53)
-    }
-    
-    func addhorizontalStackViewConstraint() {
-        contentView.addSubview(horizontalStack)
-        horizontalStack.translatesAutoresizingMaskIntoConstraints = false
-        horizontalStack.anchor(top: contentView.topAnchor, right: contentView.rightAnchor, paddingTop: 10, paddingRight: 5)
-        horizontalStack.setDimensions(height: 13, width: 69)
-    }
-    
-    func addLikesViewConstraint() {
-        likesView.setDimensions(height: 13, width: 32)
-    }
-    
-    func addCommentsViewConstraint() {
-        commentsView.setDimensions(height: 13, width: 32)
-    }
-    
-    func addLikesLabelConstraint() {
-        likesView.addSubview(likesLabel)
-        likesLabel.anchor(top: likesView.topAnchor, left: likesView.leftAnchor, paddingTop: 2, paddingLeft: 4)
-        likesLabel.setWidth(15)
-    }
-    
-    func addLikesIconConstraint() {
-        likesView.addSubview(likesIcon)
-        likesIcon.anchor(top: likesView.topAnchor, right: likesView.rightAnchor, paddingTop: 2, paddingRight: 4)
-        likesIcon.setDimensions(height: 8, width: 8)
-    }
-    
-    func addCommentLabel() {
-        commentsView.addSubview(commentLabel)
-        commentLabel.anchor(top: commentsView.topAnchor, left: commentsView.leftAnchor, paddingTop: 2, paddingLeft: 4)
-        commentLabel.setWidth(15)
-    }
-    
-    func addcommentIcon() {
-        commentsView.addSubview(commentIcon)
-        commentIcon.anchor(top: commentsView.topAnchor, right: commentsView.rightAnchor, paddingTop: 3, paddingRight: 3)
-        commentIcon.setDimensions(height: 8, width: 8)
-    }
-    
-    
-    
-}
+   

@@ -1,5 +1,5 @@
 //
-//  FeedController.swift
+//  ProfileController.swift
 //  Way2Earth MVP
 //
 //  Created by Alan Bahena on 2/7/21.
@@ -7,79 +7,67 @@
 //
 
 import UIKit
-import Firebase
 
-protocol FeedLayoutDelegate: class {
+protocol ProfileLayoutDelegate: class {
     func collectionView(collectionView: UICollectionView, heightForImageAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat
     func collectionView(collectionView: UICollectionView, heightForAnnotationAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat
+    func collectionView(collectionView: UICollectionView, sizeForSectionHeaderViewForSection section: Int) -> CGSize
 }
 
-class FeedController: UICollectionViewController {
+class ProfileController: UICollectionViewController {
     
     let items: [LayoutItem] = [
         LayoutItem(image: UIImage(named: "photo1")!, titleText: "hello world", profileImage: UIImage(named: "profileImage")!, userText: "Alan Bahena", postTime: "20 hours ago")
     ]
     
+    //MARK: - Properties
+    
     //MARK: - Lifecycle
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        navigationController?.setNavigationBarHidden(true, animated: animated)
-//    }
-//
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        navigationController?.setNavigationBarHidden(false, animated: animated)
+        override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+            navigationController?.setNavigationBarHidden(true, animated: animated)
+        }
+    
+        override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+            navigationController?.setNavigationBarHidden(false, animated: animated)
+        }
+    
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return .lightContent
 //    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setUpCollectionViewInsets()
         setUpLayout()
-        collectionView.register(FeedCell.self, forCellWithReuseIdentifier: feedCellIdentifier)
-        
-    }
-    
-    //MARK: - Actions
-
-    @objc func handleLogOut() {
-        do {
-            try Auth.auth().signOut()
-            let controller = WelcomeController()
-            let nav = UINavigationController(rootViewController: controller)
-            nav.modalPresentationStyle = .fullScreen
-            present(nav, animated: false, completion: nil)
-        } catch {
-            print("DEBUG: Failed to sign out")
-        }
+        collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: profileCellIdentifier)
+        collectionView.register(ProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: profileHeaderIdentifier)
     }
     
     //MARK: - Helpers
     
     func setUpCollectionViewInsets() {
         collectionView.backgroundColor = UIColor.spaceColor
-        collectionView.contentInset = UIEdgeInsets(top: 15, left: 5, bottom: 5, right: 5)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "LogOut", style: .plain, target: self, action: #selector(handleLogOut))
+        collectionView.contentInset = UIEdgeInsets(top: -45, left: 5, bottom: 5, right: 5)
     }
     
     func setUpLayout() {
-        if let layout = collectionView.collectionViewLayout as? FeedLayout {
+        if let layout = collectionView.collectionViewLayout as? ProfileLayout {
             layout.delegate = self
         }
     }
 }
 
+    //MARK: - ProfileLayoutDelegate
 
-    //MARK: - CustomDelegate
-
-extension FeedController: FeedLayoutDelegate {
-    
+extension ProfileController: ProfileLayoutDelegate {
     func collectionView(collectionView: UICollectionView, heightForImageAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat {
-        
         
         let image = items[indexPath.item].image
         return image.height(forWidth: withWidth)
+        
     }
     
     func collectionView(collectionView: UICollectionView, heightForAnnotationAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat {
@@ -98,19 +86,29 @@ extension FeedController: FeedLayoutDelegate {
             return titleTextHeight + userTextHeight + FeedCell.annotationPadding
         }
     }
+    
+    func collectionView(collectionView: UICollectionView, sizeForSectionHeaderViewForSection section: Int) -> CGSize {
+        return CGSize(width: view.frame.width, height: 360)
+    }
 }
 
-    //MARK: - UIColllectionViewDataSource
+    //MARK: - UICOllecitonViewDataSource
 
-extension FeedController {
+extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return  items.count
+        return items.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: feedCellIdentifier, for: indexPath) as! FeedCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: profileCellIdentifier, for: indexPath) as! ProfileCell
         
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: profileHeaderIdentifier, for: indexPath) as! ProfileHeader
+        
+        return header
     }
     
 }

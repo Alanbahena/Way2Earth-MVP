@@ -11,9 +11,9 @@ import UIKit
 
 
 
-class CustomLayout: UICollectionViewFlowLayout {
+class FeedLayout: UICollectionViewLayout {
     
-    weak var delegate: CustomDelegate!
+    weak var delegate: FeedLayoutDelegate!
     
     var cache = [CustomLayoutAttributes]()
     
@@ -42,7 +42,6 @@ class CustomLayout: UICollectionViewFlowLayout {
       
         for colum in 0 ..< numberOfcolumns {
             xOffset.append(CGFloat(colum) * columnWidth)
-            
         }
         
         var columToplacePhoto = 0
@@ -55,8 +54,6 @@ class CustomLayout: UICollectionViewFlowLayout {
             let annotationHeight:CGFloat = delegate.collectionView(collectionView: collection, heightForAnnotationAtIndexPath: indexPath, withWidth: cellWidth)
             let cellHeight = cellPadding + photoHeight + annotationHeight + cellPadding
             
-            
-            
             let frame = CGRect(x: xOffset[columToplacePhoto], y: yOffset[columToplacePhoto], width: columnWidth, height: cellHeight)
             let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
             
@@ -68,24 +65,6 @@ class CustomLayout: UICollectionViewFlowLayout {
             
             contentHeight = max(contentHeight, frame.maxY)
             yOffset[columToplacePhoto] = yOffset[columToplacePhoto] + cellHeight
-            
-            if numberOfcolumns > 1 {
-              var isColumnChanged = false
-              for index in (1..<numberOfcolumns).reversed() {
-                if yOffset[index] >= yOffset[index - 1] {
-                  columToplacePhoto = index - 1
-                  isColumnChanged = true
-                }
-                else {
-                  break
-                }
-              }
-              
-              if isColumnChanged {
-                continue
-              }
-            }
-            
             columToplacePhoto = columToplacePhoto < (numberOfcolumns - 1) ? (columToplacePhoto + 1) : 0
             
         }
@@ -101,6 +80,10 @@ class CustomLayout: UICollectionViewFlowLayout {
         }
         
         return layoutAttributes
+    }
+    
+    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+      return cache[indexPath.item]
     }
     
     
