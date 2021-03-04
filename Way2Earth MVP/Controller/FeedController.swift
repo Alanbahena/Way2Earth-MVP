@@ -46,7 +46,7 @@ class FeedController: UICollectionViewController {
     @objc func handleLogOut() {
         do {
             try Auth.auth().signOut()
-            let controller = WelcomeController()
+            let controller = LoginController()
             let nav = UINavigationController(rootViewController: controller)
             nav.modalPresentationStyle = .fullScreen
             present(nav, animated: false, completion: nil)
