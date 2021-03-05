@@ -26,11 +26,18 @@ class ProfileController: UICollectionViewController {
     
     //MARK: - Properties
     
-    var user: User? {
-        didSet { collectionView.reloadData()}
-    }
+    private var user: User
     
     //MARK: - Lifecycle
+    
+    init(user: User) {
+        self.user = user
+        super.init(collectionViewLayout: ProfileLayout())
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
         override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
@@ -50,18 +57,13 @@ class ProfileController: UICollectionViewController {
         super.viewDidLoad()
         setUpCollectionViewInsets()
         setUpLayout()
-        fetchUser()
         collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: profileCellIdentifier)
         collectionView.register(ProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: profileHeaderIdentifier)
     }
     
     //MARK: - API
     
-    func fetchUser() {
-        UserService.fetchUser { (user) in
-            self.user = user
-        }
-    }
+
     
     //MARK: - Helpers
     
@@ -126,9 +128,8 @@ extension ProfileController {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: profileHeaderIdentifier, for: indexPath) as! ProfileHeader
         header.delegate = self
         
-        if let user = user {
-            header.viewModel = ProfileHeaderViewModel(user: user)
-        } 
+        header.viewModel = ProfileHeaderViewModel(user: user)
+    
         return header
     }
     

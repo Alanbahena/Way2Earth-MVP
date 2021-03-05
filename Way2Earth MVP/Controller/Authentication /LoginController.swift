@@ -8,11 +8,16 @@
 
 import UIKit
 
+protocol AuthenticationDelegate: class {
+    func autehnticationDidComplete() 
+}
+
 class LoginController: UIViewController {
     
     //MARK: - Properties
     
     private var viewModel = LoginViewModel()
+    weak var delegate: AuthenticationDelegate?
     
     private let viewBackground:UIImageView = {
         let viewBackground = UIImageView(image: #imageLiteral(resourceName: "Stars"))
@@ -87,7 +92,7 @@ class LoginController: UIViewController {
                 print ("DEBUG: Failed to log User in \(error.localizedDescription)")
                 return
             }
-            self.dismiss(animated: false, completion: nil)
+            self.delegate?.autehnticationDidComplete()
         }
     }
     

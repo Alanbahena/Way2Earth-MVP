@@ -14,6 +14,7 @@ class RegistrationController: UIViewController {
     
     private var viewModel = RegistrationViewModel()
     private var profileImage: UIImage?
+    weak var delegate: AuthenticationDelegate?
     
     private let viewBackground:UIImageView = {
         let viewBackground = UIImageView(image: #imageLiteral(resourceName: "earth"))
@@ -120,7 +121,7 @@ class RegistrationController: UIViewController {
                 print ("DEBUG: Failed to register user \(error.localizedDescription)")
                 return
             }
-            self.dismiss(animated: false, completion: nil)
+            self.delegate?.autehnticationDidComplete()
         }
     }
     

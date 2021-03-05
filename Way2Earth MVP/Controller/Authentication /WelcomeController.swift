@@ -10,8 +10,7 @@ import UIKit
 class WelcomeController: UIViewController {
     
     //MARK: - Properties
-    
- 
+    weak var delegate: AuthenticationDelegate?
     
     private let viewBackground:UIImageView = {
         let viewBackground = UIImageView(image: #imageLiteral(resourceName: "astronaut"))
@@ -72,11 +71,13 @@ class WelcomeController: UIViewController {
     
     @objc func handleShowLogIn() {
         let controller = LoginController()
+        controller.delegate = delegate 
         navigationController?.pushViewController(controller, animated: false)
     }
     
     @objc func handleShowSignUp() {
         let controller = RegistrationController()
+        controller.delegate = delegate
         navigationController?.pushViewController(controller, animated: false)
     }
     

@@ -14,5 +14,6 @@ class SearchController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemPink
+        
     }
 }

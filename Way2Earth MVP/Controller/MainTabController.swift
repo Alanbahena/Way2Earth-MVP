@@ -13,18 +13,33 @@ class MainTabController: UITabBarController {
     
     //MARK: - Lifecycle
     
+    private var user: User? {
+        didSet {
+            guard let user = user else { return }
+            configureViewController(withUser: user)}
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureViewController()
+
         checkIfUserIsLoggedIn()
+        fetchUser()
+        
     }
     
     //MARK: - API
+    
+    func fetchUser() {
+        UserService.fetchUser { (user) in
+            self.user = user
+        }
+    }
     
     func checkIfUserIsLoggedIn() {
         if Auth.auth().currentUser == nil {
             DispatchQueue.main.async {
                 let controller = WelcomeController()
+                controller.delegate = self
                 let nav = UINavigationController(rootViewController: controller)
                 nav.modalPresentationStyle = .fullScreen
                 self.present(nav, animated: false, completion: nil)
@@ -34,7 +49,7 @@ class MainTabController: UITabBarController {
 
     // MARK: - Helpers
     
-    func configureViewController() {
+    func configureViewController(withUser user: User) {
         
         let layout = FeedLayout() 
         let feed = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "NewsFeed_unselected"), selectedImage: #imageLiteral(resourceName: "NewsFeed_selected "), rootViewController: FeedController(collectionViewLayout: layout))
@@ -42,15 +57,13 @@ class MainTabController: UITabBarController {
         let postCreator = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "Create_unselected"), selectedImage:#imageLiteral(resourceName: "Create_unselected"), rootViewController: PostCreatorController())
         let notifications = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "Notifications_unselected"), selectedImage: #imageLiteral(resourceName: "Notifications_selected"), rootViewController: NotificationsController())
         
-        let profileLayout = ProfileLayout()
-        let profile = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "Profile_unselected"), selectedImage: #imageLiteral(resourceName: "Profile_selected"), rootViewController: ProfileController(collectionViewLayout: profileLayout))
+        let profileController = ProfileController(user: user)
+        let profile = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "Profile_unselected"), selectedImage: #imageLiteral(resourceName: "Profile_selected"), rootViewController: profileController)
         
         viewControllers = [feed, search, postCreator, notifications, profile]
         
         tabBar.barTintColor = UIColor.spaceColor
         tabBar.tintColor = .white
-        
-
     }
     
     func templateNavigationController(unselectedImage: UIImage,selectedImage: UIImage, rootViewController: UIViewController) -> UINavigationController {
@@ -64,3 +77,9 @@ class MainTabController: UITabBarController {
     }
 }
 
+extension MainTabController: AuthenticationDelegate {
+    func autehnticationDidComplete() {
+        fetchUser()
+        self.dismiss(animated: false, completion: nil)
+    }
+}
