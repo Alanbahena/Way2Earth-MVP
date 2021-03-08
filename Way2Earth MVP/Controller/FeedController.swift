@@ -34,7 +34,7 @@ class FeedController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationController?.navigationBar.barStyle = .black
         setUpCollectionViewInsets()
         setUpLayout()
         collectionView.register(FeedCell.self, forCellWithReuseIdentifier: feedCellIdentifier)

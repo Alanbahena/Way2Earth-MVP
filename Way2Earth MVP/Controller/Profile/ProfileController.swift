@@ -49,9 +49,9 @@ class ProfileController: UICollectionViewController {
             navigationController?.setNavigationBarHidden(false, animated: animated)
         }
     
-//    override var preferredStatusBarStyle: UIStatusBarStyle {
-//        return .lightContent
-//    }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +69,8 @@ class ProfileController: UICollectionViewController {
     
     func setUpCollectionViewInsets() {
         collectionView.backgroundColor = UIColor.spaceColor
-        collectionView.contentInset = UIEdgeInsets(top: -45, left: 5, bottom: 5, right: 5)
+        // -45 is the isnet that touch the top anchor of the superview
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 5, bottom: 5, right: 5)
     }
     
     func setUpLayout() {

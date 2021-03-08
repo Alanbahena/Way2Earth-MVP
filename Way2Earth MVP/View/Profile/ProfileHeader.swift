@@ -174,6 +174,8 @@ class ProfileHeader: UICollectionReusableView {
         profileNameLabel.text = viewModel.profileNameLabel
         profileImageView.sd_setImage(with: viewModel.profileImageUrl)
         userNameLabel.text = viewModel.userName
+        
+        editProfileButton.setTitle(viewModel.followButtontext, for: .normal)
     }
     
     func attributedStatText(value: Int, label: String) -> NSAttributedString {
