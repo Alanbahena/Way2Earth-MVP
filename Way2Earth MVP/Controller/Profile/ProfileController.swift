@@ -57,12 +57,28 @@ class ProfileController: UICollectionViewController {
         super.viewDidLoad()
         setUpCollectionViewInsets()
         setUpLayout()
-        collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: profileCellIdentifier)
-        collectionView.register(ProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: profileHeaderIdentifier)
+        
+        checkIfUserIsFollowed()
+        fetchUserStats()
     }
     
     //MARK: - API
     
+    func checkIfUserIsFollowed() {
+        UserService.checkIfUserisFollowed(uid: user.uid) { isFollowed in
+            self.user.isFollowed = isFollowed
+            self.collectionView.reloadData()
+        }
+    }
+    
+    func fetchUserStats() {
+        UserService.fetchUserStats(uid: user.uid) { stats in
+            self.user.stats = stats
+            self.collectionView.reloadData()
+            
+            print("DEBUG: Stats \(stats)")
+        }
+    }
 
     
     //MARK: - Helpers
@@ -71,6 +87,9 @@ class ProfileController: UICollectionViewController {
         collectionView.backgroundColor = UIColor.spaceColor
         // -45 is the isnet that touch the top anchor of the superview
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 5, bottom: 5, right: 5)
+        
+        collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: profileCellIdentifier)
+        collectionView.register(ProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: profileHeaderIdentifier)
     }
     
     func setUpLayout() {
@@ -128,6 +147,7 @@ extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: profileHeaderIdentifier, for: indexPath) as! ProfileHeader
         header.delegate = self
+        header.delegate2 = self
         
         header.viewModel = ProfileHeaderViewModel(user: user)
     
@@ -142,5 +162,25 @@ extension ProfileController: HeaderDelegate {
     func didTapEdit() {
         let controller = EditProfileController()
         navigationController?.pushViewController(controller, animated: false)
+    }
+}
+
+    //MARK: - ProfileHeaderDelegate
+
+extension ProfileController: ProfileHeaderDelegate {
+    func header(_ profileHeader: ProfileHeader, didTapActionButtonFor user: User) {
+        if user.isCurrentUser {
+            print("DEBUG: Show Edit profile here ..")
+        } else if user.isFollowed {
+            UserService.unFollow(uid: user.uid) { error in
+                self.user.isFollowed = false
+                self.collectionView.reloadData()
+            }
+        } else {
+            UserService.follow(uid: user.uid) { error in
+                self.user.isFollowed = true
+                self.collectionView.reloadData()
+            }
+        }
     }
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import ImagePicker
 
 class MainTabController: UITabBarController {
     
@@ -50,6 +51,7 @@ class MainTabController: UITabBarController {
     // MARK: - Helpers
     
     func configureViewController(withUser user: User) {
+        self.delegate = self
         
         let layout = FeedLayout() 
         let feed = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "NewsFeed_unselected"), selectedImage: #imageLiteral(resourceName: "NewsFeed_selected "), rootViewController: FeedController(collectionViewLayout: layout))
@@ -79,9 +81,29 @@ class MainTabController: UITabBarController {
     }
 }
 
+    //MARK: - AuthenticationDelegate
+
 extension MainTabController: AuthenticationDelegate {
     func autehnticationDidComplete() {
         fetchUser()
         self.dismiss(animated: false, completion: nil)
     }
 }
+
+    //MARK: - UITabBarControllerDelegate
+
+extension MainTabController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        let index = viewControllers?.firstIndex(of: viewController)
+        
+        if index == 2 {
+            let picker = ImagePickerController()
+            picker.delegate = self
+        }
+        
+        return true
+    }
+}
+
+
+extension MainTabController

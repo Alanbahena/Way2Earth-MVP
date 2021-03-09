@@ -171,8 +171,7 @@
 		1B5F5B8725D0896D004940A4 /* Way2Earth MVP */ = {
 			isa = PBXGroup;
 			children = (
-				1B5F5B8825D0896D004940A4 /* AppDelegate.swift */,
-				1B5F5B8A25D0896D004940A4 /* SceneDelegate.swift */,
+				1BEEE07325F7F522008A7654 /* Cycle */,
 				1B5F5BA425D08A0D004940A4 /* Model  */,
 				1B5F5BA325D08A0B004940A4 /* View */,
 				1B5F5BA225D08A09004940A4 /* ViewModel */,
@@ -306,6 +305,15 @@
 				1BD8021C25DCB077009F6EA8 /* LayoutItem.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		1BEEE07325F7F522008A7654 /* Cycle */ = {
+			isa = PBXGroup;
+			children = (
+				1B5F5B8825D0896D004940A4 /* AppDelegate.swift */,
+				1B5F5B8A25D0896D004940A4 /* SceneDelegate.swift */,
+			);
+			path = Cycle;
 			sourceTree = "<group>";
 		};
 		1BF204B525E554CE00A49867 /* Authentication  */ = {
