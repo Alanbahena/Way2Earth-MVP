@@ -185,5 +185,4 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
         self.dismiss(animated: true, completion: nil)
         
     }
-    
 }

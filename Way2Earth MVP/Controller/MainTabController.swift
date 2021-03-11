@@ -8,7 +8,6 @@
 
 import UIKit
 import Firebase
-import ImagePicker
 
 class MainTabController: UITabBarController {
     
@@ -22,10 +21,8 @@ class MainTabController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         checkIfUserIsLoggedIn()
         fetchUser()
-        
     }
     
     //MARK: - API
@@ -75,7 +72,6 @@ class MainTabController: UITabBarController {
         nav.tabBarItem.imageInsets = UIEdgeInsets.init(top: 5, left: 0, bottom: -25, right: 0)
         nav.navigationBar.tintColor = .white
         nav.navigationBar.barTintColor = .spaceColor
-
         
         return nav
     }
@@ -97,13 +93,41 @@ extension MainTabController: UITabBarControllerDelegate {
         let index = viewControllers?.firstIndex(of: viewController)
         
         if index == 2 {
-            let picker = ImagePickerController()
+            let picker = UIImagePickerController()
             picker.delegate = self
+            picker.allowsEditing = false
+            
+            picker.modalPresentationStyle = .fullScreen
+            present(picker, animated: true, completion: nil)
         }
-        
         return true
     }
 }
 
+//MARK: -  UIImagePickerControllerDelegate
 
-extension MainTabController
+extension MainTabController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: false) {
+            guard let selectedImage = info[.originalImage] as? UIImage else { return }
+            let controller = UploadPostController()
+            controller.selectedImage = selectedImage
+            controller.delegate = self
+            
+            let nav = UINavigationController(rootViewController: controller)
+            nav.modalPresentationStyle = .fullScreen
+            self.present(nav, animated: false, completion: nil)
+        }
+    }
+}
+
+    //MARK: - UploadPostControllerDelegate
+
+extension MainTabController: UploadPostControllerDelegate {
+    func controllerDidFinishUploadingPost(_ controller: UploadPostController) {
+        selectedIndex = 0
+        controller.dismiss(animated: true, completion: nil)
+    }
+}
+
+
