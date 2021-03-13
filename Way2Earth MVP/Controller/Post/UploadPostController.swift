@@ -93,7 +93,9 @@ class UploadPostController: UIViewController {
         guard let title = TitleTextView.text else { return }
         guard let description = descriptionTextView.text else { return }
         
+        showLoader(true)
         PostService.uploadPost(image: image, title: title, description: description) { error in
+            self.showLoader(false)
             if let error = error {
                 print("DEBUG: Failed to upload post with errror \(error.localizedDescription)")
                 return

@@ -22,6 +22,8 @@ class FeedController: UICollectionViewController {
     
     //MARK: - Lifecycle
     
+    private var posts = [Post]()
+    
 //    override func viewWillAppear(_ animated: Bool) {
 //        super.viewWillAppear(animated)
 //        navigationController?.setNavigationBarHidden(true, animated: animated)
@@ -35,9 +37,11 @@ class FeedController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.barStyle = .black
+        
         setUpCollectionViewInsets()
         setUpLayout()
-        collectionView.register(FeedCell.self, forCellWithReuseIdentifier: feedCellIdentifier)
+        
+        fetchPosts()
         
     }
     
@@ -56,10 +60,20 @@ class FeedController: UICollectionViewController {
         }
     }
     
+    //MARK: - API
+    
+    func fetchPosts() {
+        PostService.fetchPost { posts in
+            self.posts = posts
+            self.collectionView.reloadData()
+        }
+    }
+    
     //MARK: - Helpers
     
     func setUpCollectionViewInsets() {
         collectionView.backgroundColor = UIColor.spaceColor
+        collectionView.register(FeedCell.self, forCellWithReuseIdentifier: feedCellIdentifier)
         collectionView.contentInset = UIEdgeInsets(top: 15, left: 5, bottom: 5, right: 5)
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "LogOut", style: .plain, target: self, action: #selector(handleLogOut))
     }
@@ -77,27 +91,22 @@ class FeedController: UICollectionViewController {
 extension FeedController: FeedLayoutDelegate {
     
     func collectionView(collectionView: UICollectionView, heightForImageAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat {
-        
-        
-        let image = items[indexPath.item].image
+        let image = #imageLiteral(resourceName: "photo1")
         return image.height(forWidth: withWidth)
     }
     
     func collectionView(collectionView: UICollectionView, heightForAnnotationAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat {
         
-        let tittleText = items[indexPath.item].titleText
-        let font = UIFont.merriWeatherBold(size: 10)
-        let titleTextHeight = tittleText.heightForWidth(width: withWidth, font: font)
+        let titleText = posts[indexPath.item].title
+        let font = UIFont.systemFont(ofSize: 10)
+        let titleTextHeight = titleText.heightForWidth(width: withWidth, font: font)
         
-        let userText = items[indexPath.item].userText
-        let userTextFont = UIFont.openSansRegular(size: 8)
-        let userTextHeight = userText.heightForWidth(width: withWidth, font: userTextFont)
+        let userText = posts[indexPath.item].title
+        let userFont = UIFont.systemFont(ofSize: 8)
+        let userTextHeight = userText.heightForWidth(width: withWidth, font: userFont)
         
-        if titleTextHeight > 24 {
-            return 24 + userTextHeight + FeedCell.annotationPadding
-        } else {
-            return titleTextHeight + userTextHeight + FeedCell.annotationPadding
-        }
+        return titleTextHeight + userTextHeight + FeedCell.annotationPadding
+
     }
 }
 
@@ -105,12 +114,12 @@ extension FeedController: FeedLayoutDelegate {
 
 extension FeedController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return  items.count
+        return  posts.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: feedCellIdentifier, for: indexPath) as! FeedCell
-        
+        cell.viewModel = PostViewModel(post: posts[indexPath.row])
         return cell
     }
     

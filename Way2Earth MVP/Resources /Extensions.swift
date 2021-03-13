@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import JGProgressHUD
 
 extension UIButton {
     func attributedTittle(firstPart : String, secondPart: String){
@@ -80,7 +81,7 @@ extension UIColor {
 
 extension UIViewController {
     
-
+    static let hud = JGProgressHUD(style: .dark)
     
     func configureGradientLayer() {
         let gradient = CAGradientLayer()
@@ -90,6 +91,15 @@ extension UIViewController {
         gradient.frame = view.frame
     }
     
+    func showLoader(_ show: Bool) {
+        view.endEditing(true)
+        
+        if show {
+            UIViewController.hud.show(in: view)
+        } else {
+            UIViewController.hud.dismiss()
+        }
+    }
  
     
 }
