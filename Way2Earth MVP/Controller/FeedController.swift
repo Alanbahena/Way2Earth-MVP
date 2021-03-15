@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import AVFoundation
 
 protocol FeedLayoutDelegate: class {
     func collectionView(collectionView: UICollectionView, heightForImageAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat
@@ -15,10 +16,7 @@ protocol FeedLayoutDelegate: class {
 }
 
 class FeedController: UICollectionViewController {
-    
-    let items: [LayoutItem] = [
-        LayoutItem(image: UIImage(named: "photo1")!, titleText: "hello world", profileImage: UIImage(named: "profileImage")!, userText: "Alan Bahena", postTime: "20 hours ago")
-    ]
+  
     
     //MARK: - Lifecycle
     
@@ -46,6 +44,11 @@ class FeedController: UICollectionViewController {
     }
     
     //MARK: - Actions
+    
+    @objc func handleRefresh() {
+        posts.removeAll()
+        fetchPosts()
+    }
 
     @objc func handleLogOut() {
         do {
@@ -65,6 +68,7 @@ class FeedController: UICollectionViewController {
     func fetchPosts() {
         PostService.fetchPost { posts in
             self.posts = posts
+            self.collectionView.refreshControl?.endRefreshing()
             self.collectionView.reloadData()
         }
     }
@@ -76,6 +80,10 @@ class FeedController: UICollectionViewController {
         collectionView.register(FeedCell.self, forCellWithReuseIdentifier: feedCellIdentifier)
         collectionView.contentInset = UIEdgeInsets(top: 15, left: 5, bottom: 5, right: 5)
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "LogOut", style: .plain, target: self, action: #selector(handleLogOut))
+        
+        let refresher = UIRefreshControl()
+        refresher.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        collectionView.refreshControl = refresher
     }
     
     func setUpLayout() {
@@ -91,22 +99,27 @@ class FeedController: UICollectionViewController {
 extension FeedController: FeedLayoutDelegate {
     
     func collectionView(collectionView: UICollectionView, heightForImageAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat {
-        let image = #imageLiteral(resourceName: "photo1")
-        return image.height(forWidth: withWidth)
+        let url = URL(string: posts[indexPath.item].imageUrl)
+        let imageSize = sizeOfImageAt(url: url!)
+        let boundingRect = CGRect(x: 0, y: 0, width: withWidth, height: CGFloat(MAXFLOAT))
+        let rect = AVMakeRect(aspectRatio: imageSize! , insideRect: boundingRect)
+        print("DEBUG: Height of the image is \(rect.size.height)")
+
+        return rect.size.height
     }
     
     func collectionView(collectionView: UICollectionView, heightForAnnotationAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat {
         
+        //TitleText
         let titleText = posts[indexPath.item].title
-        let font = UIFont.systemFont(ofSize: 10)
+        let font = UIFont.merriWeatherBold(size: 10)
         let titleTextHeight = titleText.heightForWidth(width: withWidth, font: font)
-        
-        let userText = posts[indexPath.item].title
-        let userFont = UIFont.systemFont(ofSize: 8)
+        //UserText
+        let userText = posts[indexPath.item].ownerFullName
+        let userFont = UIFont.openSansRegular(size: 8)
         let userTextHeight = userText.heightForWidth(width: withWidth, font: userFont)
         
         return titleTextHeight + userTextHeight + FeedCell.annotationPadding
-
     }
 }
 
@@ -122,5 +135,29 @@ extension FeedController {
         cell.viewModel = PostViewModel(post: posts[indexPath.row])
         return cell
     }
+}
+
+    //MARK: - sizeForImageAtURL
+
+extension FeedController {
+    
+    func sizeOfImageAt(url: URL) -> CGSize? {
+            // with CGImageSource we avoid loading the whole image into memory
+            guard let source = CGImageSourceCreateWithURL(url as CFURL, nil) else {
+                return nil
+            }
+
+            let propertiesOptions = [kCGImageSourceShouldCache: false] as CFDictionary
+            guard let properties = CGImageSourceCopyPropertiesAtIndex(source, 0, propertiesOptions) as? [CFString: Any] else {
+                return nil
+            }
+
+            if let width = properties[kCGImagePropertyPixelWidth] as? CGFloat,
+                let height = properties[kCGImagePropertyPixelHeight] as? CGFloat {
+                return CGSize(width: width, height: height)
+            } else {
+                return nil
+            }
+        }
     
 }

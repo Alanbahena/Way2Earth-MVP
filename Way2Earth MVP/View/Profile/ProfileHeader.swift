@@ -23,14 +23,13 @@ class ProfileHeader: UICollectionReusableView {
         didSet { configure() }
     }
     
-    weak var delegate: HeaderDelegate?
-    weak var delegate2: ProfileHeaderDelegate?
+    weak var delegate: ProfileHeaderDelegate?
     
     var profileBackgroundImage: UIImageView = {
         let profileBI = UIImageView()
         profileBI.backgroundColor = .lightGray
         profileBI.contentMode = .scaleToFill
-//        profileBI.image = #imageLiteral(resourceName: "profileBackground")
+        profileBI.image = #imageLiteral(resourceName: "profileBackground")
         return profileBI
     }()
     
@@ -167,9 +166,7 @@ class ProfileHeader: UICollectionReusableView {
     
     @objc func handleEditProfileFollowTapped() {
         guard let viewModel = viewModel else { return }
-        delegate2?.header(self, didTapActionButtonFor: viewModel.user)
-        
-//        delegate?.didTapEdit()
+        delegate?.header(self, didTapActionButtonFor: viewModel.user)
     }
     
     //MARK: - Helpers

@@ -9,6 +9,7 @@
 import Firebase
 
 struct Post {
+    
     var description: String
     var title: String
     var likes: Int
@@ -17,6 +18,8 @@ struct Post {
     let ownerUid: String
     let timestamp: Timestamp
     let postId: String
+    let ownerImageUrl: String
+    let ownerFullName: String
     
     init(postId: String, dictionary: [String: Any]) {
         self.description = dictionary["description"] as? String ?? ""
@@ -27,6 +30,8 @@ struct Post {
         self.ownerUid = dictionary["ownerUid"] as? String ?? ""
         self.timestamp = dictionary["timestamp"] as? Timestamp ?? Timestamp(date: Date())
         self.postId = postId
+        self.ownerImageUrl = dictionary["ownerImageUrl"] as? String ?? ""
+        self.ownerFullName = dictionary["ownerFullName"] as? String ?? ""
     }
     
 }

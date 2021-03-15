@@ -261,11 +261,8 @@ class FeedCell: UICollectionViewCell {
             likesLabel.textAlignment = .center
             likesLabel.addCharacterSpacing(kernValue: -0.8)
             return likesLabel
-            
         }
     }
-    
-    
 }
 
 
@@ -274,15 +271,19 @@ extension FeedCell {
     
     func configure () {
         guard let viewModel = viewModel else { return }
-        imageView.image = #imageLiteral(resourceName: "photo1")
-        profileImageView.image = #imageLiteral(resourceName: "profileImage")
-        titleTextLabel.text = viewModel.title
-        postTimeLabel.text = "20 hours ago"
-        userTextLabel.text = "Alan Bahena"
-        commentsLabel.text = "5"
+        
+        //Post
+        imageView.sd_setImage(with: viewModel.imageUrl)
+        commentsLabel.text = viewModel.commentsLabelText
+        likesLabel.text = viewModel.likesLabelText
         commentIcon.image = #imageLiteral(resourceName: "CommentsIcon")
         likesIcon.image = #imageLiteral(resourceName: "LikesIcon")
-        likesLabel.text = "25"
+        
+        //User
+        profileImageView.sd_setImage(with: viewModel.userProfileImageUrl)
+        titleTextLabel.text = viewModel.title
+        postTimeLabel.text = "20 hours ago"
+        userTextLabel.text = viewModel.userFullName
     }
     
     func addConstraintsForImageView() {

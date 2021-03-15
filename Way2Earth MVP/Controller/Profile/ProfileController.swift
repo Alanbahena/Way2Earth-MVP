@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol HeaderDelegate: class {
-    func didTapEdit()
-}
-
 protocol ProfileLayoutDelegate: class {
     func collectionView(collectionView: UICollectionView, heightForImageAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat
     func collectionView(collectionView: UICollectionView, heightForAnnotationAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat
@@ -147,7 +143,6 @@ extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: profileHeaderIdentifier, for: indexPath) as! ProfileHeader
         header.delegate = self
-        header.delegate2 = self
         
         header.viewModel = ProfileHeaderViewModel(user: user)
     
@@ -158,12 +153,12 @@ extension ProfileController {
 
     //MARK: - HeaderDelegate
 
-extension ProfileController: HeaderDelegate {
-    func didTapEdit() {
-        let controller = EditProfileController()
-        navigationController?.pushViewController(controller, animated: false)
-    }
-}
+//extension ProfileController: HeaderDelegate {
+//    func didTapEdit() {
+//        let controller = EditProfileController()
+//        navigationController?.pushViewController(controller, animated: false)
+//    }
+//}
 
     //MARK: - ProfileHeaderDelegate
 

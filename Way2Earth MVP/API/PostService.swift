@@ -11,18 +11,18 @@ import Firebase
 
 struct PostService {
     
-    static func uploadPost(image: UIImage, title: String, description: String, completion: @escaping(FirestoreCompletion)) {
+    static func uploadPost(image: UIImage, title: String, description: String, user: User, completion: @escaping(FirestoreCompletion)) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
         ImageUploader.uploadImage(image: image) { imageUrl in
-            let data = ["title": title, "description": description, "timestamp": Timestamp(date: Date()), "likes": 0, "comments": 0, "imageUrl": imageUrl, "ownerUid" : uid] as [String : Any]
+            let data = ["title": title, "description": description, "timestamp": Timestamp(date: Date()), "likes": 0, "comments": 0, "imageUrl": imageUrl, "ownerUid" : uid, "ownerImageUrl": user.profileImageUrl, "ownerFullName": user.fullName] as [String : Any]
             
             COLLECTION_POSTS.addDocument(data: data, completion: completion)
         }
     }
     
     static func fetchPost(completion: @escaping([Post]) -> Void) {
-        COLLECTION_POSTS.getDocuments { snapshot, error in
+        COLLECTION_POSTS.order(by: "timestamp", descending: true).getDocuments { snapshot, error in
             guard let documents = snapshot?.documents else { return }
             
             let posts = documents.map({ Post(postId: $0.documentID, dictionary: $0.data()) })
