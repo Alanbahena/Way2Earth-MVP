@@ -55,10 +55,10 @@ class FeedCell: UICollectionViewCell {
         }
     }
     
-    fileprivate var imageViewHeightLayoutConstraint: NSLayoutConstraint?
-    fileprivate var imageHeight: CGFloat!
+    private var imageViewHeightLayoutConstraint: NSLayoutConstraint?
+    private var imageHeight: CGFloat!
     
-    override public func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+    override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         super.apply(layoutAttributes)
         if let attributes = layoutAttributes as? CustomLayoutAttributes {
             imageHeight = attributes.imageHeight

@@ -34,7 +34,7 @@ class FeedLayout: UICollectionViewLayout {
     }
     
     override func prepare() {
-        guard let collection = collectionView else { return }
+        guard cache.isEmpty, let collection = collectionView else { return }
         let columnWidth  = contentWidth / CGFloat(numberOfcolumns)
         let cellWidth = columnWidth - (cellPadding * 2)
         
@@ -85,6 +85,4 @@ class FeedLayout: UICollectionViewLayout {
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
       return cache[indexPath.item]
     }
-    
-    
 }

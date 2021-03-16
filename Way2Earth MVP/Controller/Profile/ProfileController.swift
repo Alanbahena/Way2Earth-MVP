@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 protocol ProfileLayoutDelegate: class {
     func collectionView(collectionView: UICollectionView, heightForImageAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat
@@ -16,13 +17,10 @@ protocol ProfileLayoutDelegate: class {
 
 class ProfileController: UICollectionViewController {
     
-    let items: [LayoutItem] = [
-        LayoutItem(image: UIImage(named: "photo1")!, titleText: "hello world", profileImage: UIImage(named: "profileImage")!, userText: "Alan Bahena", postTime: "20 hours ago")
-    ]
-    
     //MARK: - Properties
     
     private var user: User
+    private var posts = [Post]()
     
     //MARK: - Lifecycle
     
@@ -54,8 +52,11 @@ class ProfileController: UICollectionViewController {
         setUpCollectionViewInsets()
         setUpLayout()
         
+       
         checkIfUserIsFollowed()
         fetchUserStats()
+        fetchPosts()
+       
     }
     
     //MARK: - API
@@ -71,8 +72,13 @@ class ProfileController: UICollectionViewController {
         UserService.fetchUserStats(uid: user.uid) { stats in
             self.user.stats = stats
             self.collectionView.reloadData()
-            
-            print("DEBUG: Stats \(stats)")
+        }
+    }
+    
+    func fetchPosts() {
+        PostService.fetchPosts(forUser: user.uid) { posts in
+            self.posts = posts
+            self.collectionView.reloadData()
         }
     }
 
@@ -84,8 +90,8 @@ class ProfileController: UICollectionViewController {
         // -45 is the isnet that touch the top anchor of the superview
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 5, bottom: 5, right: 5)
         
-        collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: profileCellIdentifier)
         collectionView.register(ProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: profileHeaderIdentifier)
+        collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: profileCellIdentifier)
     }
     
     func setUpLayout() {
@@ -100,26 +106,25 @@ class ProfileController: UICollectionViewController {
 extension ProfileController: ProfileLayoutDelegate {
     func collectionView(collectionView: UICollectionView, heightForImageAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat {
         
-        let image = items[indexPath.item].image
-        return image.height(forWidth: withWidth)
-        
+        let url = URL(string: posts[indexPath.item].imageUrl)
+        let imageSize = sizeOfImageAt(url: url!)
+        let boundingRect = CGRect(x: 0, y: 0, width: withWidth, height: CGFloat(MAXFLOAT))
+        let rect = AVMakeRect(aspectRatio: imageSize! , insideRect: boundingRect)
+
+        return rect.size.height
     }
     
     func collectionView(collectionView: UICollectionView, heightForAnnotationAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat {
-        
-        let tittleText = items[indexPath.item].titleText
+        //TitleText
+        let titleText = posts[indexPath.item].title
         let font = UIFont.merriWeatherBold(size: 10)
-        let titleTextHeight = tittleText.heightForWidth(width: withWidth, font: font)
-        
-        let userText = items[indexPath.item].userText
-        let userTextFont = UIFont.openSansRegular(size: 8)
-        let userTextHeight = userText.heightForWidth(width: withWidth, font: userTextFont)
-        
-        if titleTextHeight > 24 {
-            return 24 + userTextHeight + FeedCell.annotationPadding
-        } else {
-            return titleTextHeight + userTextHeight + FeedCell.annotationPadding
-        }
+        let titleTextHeight = titleText.heightForWidth(width: withWidth, font: font)
+        //UserText
+        let userText = posts[indexPath.item].ownerFullName
+        let userFont = UIFont.openSansRegular(size: 8)
+        let userTextHeight = userText.heightForWidth(width: withWidth, font: userFont)
+
+        return titleTextHeight + userTextHeight + FeedCell.annotationPadding
     }
     
     func collectionView(collectionView: UICollectionView, sizeForSectionHeaderViewForSection section: Int) -> CGSize {
@@ -131,12 +136,12 @@ extension ProfileController: ProfileLayoutDelegate {
 
 extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return items.count
+        return posts.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: profileCellIdentifier, for: indexPath) as! ProfileCell
-        
+        cell.viewModel = PostViewModel(post: posts[indexPath.row])
         return cell
     }
     
@@ -148,17 +153,15 @@ extension ProfileController {
     
         return header
     }
-    
 }
 
-    //MARK: - HeaderDelegate
+    //MARK: - UICOllectionViewDelegate
 
-//extension ProfileController: HeaderDelegate {
-//    func didTapEdit() {
-//        let controller = EditProfileController()
-//        navigationController?.pushViewController(controller, animated: false)
-//    }
-//}
+extension ProfileController {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("DEBUG: Post is \(posts[indexPath.row])")
+    }
+}
 
     //MARK: - ProfileHeaderDelegate
 
@@ -166,6 +169,8 @@ extension ProfileController: ProfileHeaderDelegate {
     func header(_ profileHeader: ProfileHeader, didTapActionButtonFor user: User) {
         if user.isCurrentUser {
             print("DEBUG: Show Edit profile here ..")
+//            let controller = EditProfileController()
+            //        navigationController?.pushViewController(controller, animated: false)
         } else if user.isFollowed {
             UserService.unFollow(uid: user.uid) { error in
                 self.user.isFollowed = false
@@ -178,4 +183,28 @@ extension ProfileController: ProfileHeaderDelegate {
             }
         }
     }
+}
+
+    //MARK: - URLSizeOfImage
+
+extension ProfileController {
+    
+    func sizeOfImageAt(url: URL) -> CGSize? {
+            // with CGImageSource we avoid loading the whole image into memory
+            guard let source = CGImageSourceCreateWithURL(url as CFURL, nil) else {
+                return nil
+            }
+
+            let propertiesOptions = [kCGImageSourceShouldCache: false] as CFDictionary
+            guard let properties = CGImageSourceCopyPropertiesAtIndex(source, 0, propertiesOptions) as? [CFString: Any] else {
+                return nil
+            }
+
+            if let width = properties[kCGImagePropertyPixelWidth] as? CGFloat,
+                let height = properties[kCGImagePropertyPixelHeight] as? CGFloat {
+                return CGSize(width: width, height: height)
+            } else {
+                return nil
+            }
+        }
 }

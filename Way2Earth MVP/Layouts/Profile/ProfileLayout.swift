@@ -11,12 +11,13 @@ class ProfileLayout: UICollectionViewLayout {
     
     weak var delegate: ProfileLayoutDelegate!
     
-    var cache = [ProfileLayoutAttributes]()
+    private var headerCache = [ProfileLayoutAttributes]()
+    private var itemCache = [ProfileLayoutAttributes]()
     
     var numberOfcolumns = 2
-    
     var cellPadding:CGFloat = 5
     
+    //Total height of the content. Will be used to configure the scrollview content.
     private var contentHeight: CGFloat = 0
     
     private var contentWidth: CGFloat {
@@ -29,10 +30,16 @@ class ProfileLayout: UICollectionViewLayout {
         return CGSize(width: contentWidth, height: contentHeight)
     }
     
+    override class var layoutAttributesClass: AnyClass {
+        return ProfileLayoutAttributes.self
+    }
+    
+    //Layout is Calculated here.
     override func prepare() {
-        guard
-            cache.isEmpty,
-            let collection = collectionView else { return }
+        super.prepare()
+        
+        //Layout Attributes are only calculated when cache is empty and the collection view exists.
+        guard itemCache.isEmpty, headerCache.isEmpty, let collection = collectionView else { return }
         
         let columnWidth  = contentWidth / CGFloat(numberOfcolumns)
         let cellWidth = columnWidth - (cellPadding * 2)
@@ -48,13 +55,11 @@ class ProfileLayout: UICollectionViewLayout {
         for section in 0..<collection.numberOfSections {
             //Header
             let headerSize = delegate.collectionView(collectionView: collection, sizeForSectionHeaderViewForSection: section)
-            let headerX = (contentWidth - headerSize.width) / 2
-            let headerFrame = CGRect(origin: CGPoint(x: headerX, y: contentHeight), size: headerSize)
-            let headerAttributes = ProfileLayoutAttributes(forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, with: IndexPath(item: 0, section: section))
-            
+            let headerFrame = CGRect(origin: CGPoint(x: 0.0, y: contentHeight), size: headerSize)
+            let headerAttributes = ProfileLayoutAttributes(forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, with: IndexPath(row: 0, section: section))
             headerAttributes.frame = headerFrame
-            cache.append(headerAttributes)
             contentHeight = headerFrame.maxY
+            headerCache.append(headerAttributes)
             
             //Cell
             var yOffset = [CGFloat] (repeating: contentHeight, count: numberOfcolumns)
@@ -71,22 +76,31 @@ class ProfileLayout: UICollectionViewLayout {
                 let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
                 
                 let attributes = ProfileLayoutAttributes(forCellWith: indexPath)
+                attributes.imageHeight = photoHeight
                 attributes.frame = insetFrame
                 
-                self.cache.append(attributes)
-                
+                itemCache.append(attributes)
                 contentHeight = max(contentHeight, frame.maxY)
                 yOffset[columToplacePhoto] = yOffset[columToplacePhoto] + cellHeight
                 columToplacePhoto = columToplacePhoto < (numberOfcolumns - 1) ? (columToplacePhoto + 1) : 0
             }
         }
+        
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        var layoutAttributes = [UICollectionViewLayoutAttributes]()
+        super.layoutAttributesForElements(in: rect)
         
-        for attributes in cache {
+        var layoutAttributes: [ProfileLayoutAttributes] = []
+        
+        for attributes in itemCache {
             if attributes.frame.intersects(rect) {
+                layoutAttributes.append(attributes)
+            }
+        }
+        
+        for attributes in headerCache {
+            if attributes.frame.intersects(rect){
                 layoutAttributes.append(attributes)
             }
         }
@@ -94,8 +108,24 @@ class ProfileLayout: UICollectionViewLayout {
         return layoutAttributes
     }
     
-    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-      return cache[indexPath.item]
+    override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        super.layoutAttributesForSupplementaryView(ofKind: elementKind, at: indexPath)
+        return headerCache[indexPath.section]
     }
+    
+    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        super.layoutAttributesForItem(at: indexPath)
+      return itemCache[indexPath.item]
+    }
+    
+    override func invalidateLayout() {
+        itemCache.removeAll()
+        headerCache.removeAll()
+        
+        contentHeight = 0
+        
+        super.invalidateLayout()
+    }
+    
     
 }

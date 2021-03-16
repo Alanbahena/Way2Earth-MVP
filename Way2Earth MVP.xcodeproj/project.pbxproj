@@ -48,6 +48,7 @@
 		1BD8021725DCB007009F6EA8 /* CustomLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8021625DCB007009F6EA8 /* CustomLayoutAttributes.swift */; };
 		1BD8021D25DCB077009F6EA8 /* LayoutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8021C25DCB077009F6EA8 /* LayoutItem.swift */; };
 		1BD8022025DCB1C3009F6EA8 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8021F25DCB1C3009F6EA8 /* FeedCell.swift */; };
+		1BECF67126013C0800F986C0 /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECF67026013C0800F986C0 /* PostController.swift */; };
 		1BEEE09625F82735008A7654 /* UploadPostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEEE09525F82735008A7654 /* UploadPostController.swift */; };
 		1BF204B325E5508B00A49867 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1BF204B225E5508B00A49867 /* Roboto-Regular.ttf */; };
 		1BF204B725E554E000A49867 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF204B625E554E000A49867 /* LoginController.swift */; };
@@ -101,6 +102,7 @@
 		1BD8021625DCB007009F6EA8 /* CustomLayoutAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLayoutAttributes.swift; sourceTree = "<group>"; };
 		1BD8021C25DCB077009F6EA8 /* LayoutItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutItem.swift; sourceTree = "<group>"; };
 		1BD8021F25DCB1C3009F6EA8 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
+		1BECF67026013C0800F986C0 /* PostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
 		1BEEE09525F82735008A7654 /* UploadPostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostController.swift; sourceTree = "<group>"; };
 		1BF204B225E5508B00A49867 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		1BF204B625E554E000A49867 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -335,6 +337,7 @@
 			children = (
 				1B5F5BB525D08C9C004940A4 /* PostCreatorController.swift */,
 				1BEEE09525F82735008A7654 /* UploadPostController.swift */,
+				1BECF67026013C0800F986C0 /* PostController.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -527,6 +530,7 @@
 				1B4C80B625F6AF6600C50712 /* SearchResutlsCellViewModel.swift in Sources */,
 				1B596AFC25F0143D002B855A /* profileLayoutAttributes.swift in Sources */,
 				1BF204C525E5FC2200A49867 /* CustomTextField.swift in Sources */,
+				1BECF67126013C0800F986C0 /* PostController.swift in Sources */,
 				1B79AEE125F34AF2000E6B57 /* CategorieModel.swift in Sources */,
 				1BD801F925DC98AA009F6EA8 /* Extensions.swift in Sources */,
 				1B2292FD25F2C6E80047EC38 /* SearchResultsViewController.swift in Sources */,
