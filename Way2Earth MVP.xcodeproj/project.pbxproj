@@ -49,6 +49,10 @@
 		1BD8021D25DCB077009F6EA8 /* LayoutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8021C25DCB077009F6EA8 /* LayoutItem.swift */; };
 		1BD8022025DCB1C3009F6EA8 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8021F25DCB1C3009F6EA8 /* FeedCell.swift */; };
 		1BECF67126013C0800F986C0 /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECF67026013C0800F986C0 /* PostController.swift */; };
+		1BECF6752601427C00F986C0 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECF6742601427C00F986C0 /* PostCell.swift */; };
+		1BECF6792601428800F986C0 /* PostHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECF6782601428800F986C0 /* PostHeader.swift */; };
+		1BECF67D2601432F00F986C0 /* PostLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECF67C2601432F00F986C0 /* PostLayout.swift */; };
+		1BECF6812601433B00F986C0 /* PostLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECF6802601433B00F986C0 /* PostLayoutAttributes.swift */; };
 		1BEEE09625F82735008A7654 /* UploadPostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEEE09525F82735008A7654 /* UploadPostController.swift */; };
 		1BF204B325E5508B00A49867 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1BF204B225E5508B00A49867 /* Roboto-Regular.ttf */; };
 		1BF204B725E554E000A49867 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF204B625E554E000A49867 /* LoginController.swift */; };
@@ -103,6 +107,10 @@
 		1BD8021C25DCB077009F6EA8 /* LayoutItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutItem.swift; sourceTree = "<group>"; };
 		1BD8021F25DCB1C3009F6EA8 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		1BECF67026013C0800F986C0 /* PostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
+		1BECF6742601427C00F986C0 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
+		1BECF6782601428800F986C0 /* PostHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHeader.swift; sourceTree = "<group>"; };
+		1BECF67C2601432F00F986C0 /* PostLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLayout.swift; sourceTree = "<group>"; };
+		1BECF6802601433B00F986C0 /* PostLayoutAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLayoutAttributes.swift; sourceTree = "<group>"; };
 		1BEEE09525F82735008A7654 /* UploadPostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostController.swift; sourceTree = "<group>"; };
 		1BF204B225E5508B00A49867 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		1BF204B625E554E000A49867 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -250,8 +258,9 @@
 		1B5F5BA325D08A0B004940A4 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1B22930425F2D0A00047EC38 /* Search */,
 				1BF9523C25EDB5F30028F319 /* Feed */,
+				1B22930425F2D0A00047EC38 /* Search */,
+				1BECF6732601425800F986C0 /* Post */,
 				1B2A9B3125E84DB200FF61F8 /* Profile */,
 				1BF9523D25EDB6060028F319 /* Utils */,
 			);
@@ -308,6 +317,7 @@
 		1BD8021225DCAFE4009F6EA8 /* Layouts */ = {
 			isa = PBXGroup;
 			children = (
+				1BECF67B2601431F00F986C0 /* Post */,
 				1B6CC36B25E9821300B603CF /* NewsFeed */,
 				1B6CC36A25E9820D00B603CF /* Profile */,
 				1BD8021B25DCB06F009F6EA8 /* Model */,
@@ -321,6 +331,24 @@
 				1BD8021C25DCB077009F6EA8 /* LayoutItem.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		1BECF6732601425800F986C0 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				1BECF6742601427C00F986C0 /* PostCell.swift */,
+				1BECF6782601428800F986C0 /* PostHeader.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		1BECF67B2601431F00F986C0 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				1BECF67C2601432F00F986C0 /* PostLayout.swift */,
+				1BECF6802601433B00F986C0 /* PostLayoutAttributes.swift */,
+			);
+			path = Post;
 			sourceTree = "<group>";
 		};
 		1BEEE07325F7F522008A7654 /* Cycle */ = {
@@ -522,6 +550,7 @@
 				1B2A9B2C25E84DA400FF61F8 /* ProfileCell.swift in Sources */,
 				1B5F5BB625D08C9C004940A4 /* PostCreatorController.swift in Sources */,
 				1B1EEE5525E745E3006694D9 /* AuthService.swift in Sources */,
+				1BECF6752601427C00F986C0 /* PostCell.swift in Sources */,
 				1B749AA325E6D793005C8498 /* AuthenticationViewModel.swift in Sources */,
 				1B2A9B2F25E84DAE00FF61F8 /* ProfileHeader.swift in Sources */,
 				1B5F5BA725D08A8D004940A4 /* MainTabController.swift in Sources */,
@@ -530,7 +559,9 @@
 				1B4C80B625F6AF6600C50712 /* SearchResutlsCellViewModel.swift in Sources */,
 				1B596AFC25F0143D002B855A /* profileLayoutAttributes.swift in Sources */,
 				1BF204C525E5FC2200A49867 /* CustomTextField.swift in Sources */,
+				1BECF6792601428800F986C0 /* PostHeader.swift in Sources */,
 				1BECF67126013C0800F986C0 /* PostController.swift in Sources */,
+				1BECF6812601433B00F986C0 /* PostLayoutAttributes.swift in Sources */,
 				1B79AEE125F34AF2000E6B57 /* CategorieModel.swift in Sources */,
 				1BD801F925DC98AA009F6EA8 /* Extensions.swift in Sources */,
 				1B2292FD25F2C6E80047EC38 /* SearchResultsViewController.swift in Sources */,
@@ -543,6 +574,7 @@
 				1B5F5BBC25D08CB2004940A4 /* ProfileController.swift in Sources */,
 				1BF204BB25E554F000A49867 /* RegistrationController.swift in Sources */,
 				1B0B1FFC25FAAD2D0041B9FD /* Post.swift in Sources */,
+				1BECF67D2601432F00F986C0 /* PostLayout.swift in Sources */,
 				1BF204B725E554E000A49867 /* LoginController.swift in Sources */,
 				1B08B23825F15DF30099327C /* Constants.swift in Sources */,
 			);

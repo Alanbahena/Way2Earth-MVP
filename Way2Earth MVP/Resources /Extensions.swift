@@ -10,6 +10,30 @@ import UIKit
 import AVFoundation
 import JGProgressHUD
 
+extension UIViewController {
+    func setTitle(_ title: String, andImage image: UIImage) {
+        //label
+        let titleLbl = UILabel()
+        titleLbl.text = title
+        titleLbl.textColor = UIColor.white
+        titleLbl.font = UIFont.robotoBold(size: 18)
+        //Image
+        let imageView = UIImageView(image: image)
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.setDimensions(height: 35, width: 35)
+        imageView.backgroundColor = .lightGray
+        imageView.layer.cornerRadius = 35/2
+        imageView.layer.borderWidth = 1
+        imageView.layer.borderColor = UIColor.white.cgColor
+        //titleLabel
+        let titleView = UIStackView(arrangedSubviews: [imageView, titleLbl])
+        titleView.axis = .horizontal
+        titleView.spacing = 10.0
+        navigationItem.titleView = titleView
+    }
+}
+
 extension UIButton {
     func attributedTittle(firstPart : String, secondPart: String){
         let atts: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(white: 1, alpha: 0.9), .font: UIFont.RobotoRegular(size: 16)]

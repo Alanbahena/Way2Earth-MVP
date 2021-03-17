@@ -103,7 +103,6 @@ extension FeedController: FeedLayoutDelegate {
         let imageSize = sizeOfImageAt(url: url!)
         let boundingRect = CGRect(x: 0, y: 0, width: withWidth, height: CGFloat(MAXFLOAT))
         let rect = AVMakeRect(aspectRatio: imageSize! , insideRect: boundingRect)
-//        print("DEBUG: Height of the image is \(rect.size.height)")
 
         return rect.size.height
     }
@@ -141,8 +140,8 @@ extension FeedController {
 
 extension FeedController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let controller = PostController(collectionViewLayout: UICollectionViewFlowLayout())
-        navigationController?.pushViewController(controller, animated: true)
+        let controller = PostController(collectionViewLayout: PostLayout())
+        navigationController?.pushViewController(controller, animated: false)
     }
 }
 

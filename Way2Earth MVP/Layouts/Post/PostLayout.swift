@@ -1,18 +1,19 @@
 //
-//  PinterestLayout.swift
-//  Test6
+//  PostLayout.swift
+//  Way2Earth MVP
 //
-//  Created by Alan Bahena on 2/13/21.
+//  Created by Alan Bahena on 3/16/21.
 //  Copyright © 2021 Alan Bahena. All rights reserved.
 //
+
 import UIKit
 
-class ProfileLayout: UICollectionViewLayout {
+class PostLayout: UICollectionViewLayout {
     
-    weak var delegate: ProfileLayoutDelegate!
+    weak var delegate: PostLayoutDelegate!
     
-    private var headerCache = [ProfileLayoutAttributes]()
-    private var itemCache = [ProfileLayoutAttributes]()
+    private var headerCache = [PostLayoutAttributes]()
+    private var itemCache = [PostLayoutAttributes]()
     
     var numberOfcolumns = 2
     var cellPadding:CGFloat = 5
@@ -31,8 +32,9 @@ class ProfileLayout: UICollectionViewLayout {
     }
     
     override class var layoutAttributesClass: AnyClass {
-        return ProfileLayoutAttributes.self
+        return PostLayoutAttributes.self
     }
+
     
     //Layout is Calculated here.
     override func prepare() {
@@ -54,10 +56,13 @@ class ProfileLayout: UICollectionViewLayout {
         
         for section in 0..<collection.numberOfSections {
             //Header
-            let headerSize = delegate.collectionView(collectionView: collection, sizeForSectionHeaderViewForSection: section)
-            let headerFrame = CGRect(origin: CGPoint(x: 0.0, y: contentHeight), size: headerSize)
-            let headerAttributes = ProfileLayoutAttributes(forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, with: IndexPath(row: 0, section: section))
+            let headerImageSize = delegate.collectionView(collectionView: collection, sizeForSectionImageHeaderViewForSection: section)
+            let headerAnnotationSize = delegate.collectionView(collectionView: collection, sizeForSectionAnnotationHeaderViewForSection: section)
+            let headersize = headerImageSize + headerAnnotationSize
+            let headerFrame = CGRect(x: 0.0, y: contentHeight, width: collection.frame.size.width, height: headersize)
+            let headerAttributes = PostLayoutAttributes(forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, with: IndexPath(row: 0, section: section))
             headerAttributes.frame = headerFrame
+            headerAttributes.imageHeader = headerImageSize
             contentHeight = headerFrame.maxY
             headerCache.append(headerAttributes)
             
@@ -75,7 +80,7 @@ class ProfileLayout: UICollectionViewLayout {
                 let frame = CGRect(x: xOffset[columToplacePhoto], y: yOffset[columToplacePhoto], width: columnWidth, height: cellHeight)
                 let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
                 
-                let attributes = ProfileLayoutAttributes(forCellWith: indexPath)
+                let attributes = PostLayoutAttributes(forCellWith: indexPath)
                 attributes.imageHeight = photoHeight
                 attributes.frame = insetFrame
                 
@@ -90,7 +95,7 @@ class ProfileLayout: UICollectionViewLayout {
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         super.layoutAttributesForElements(in: rect)
         
-        var layoutAttributes: [ProfileLayoutAttributes] = []
+        var layoutAttributes: [PostLayoutAttributes] = []
         
         for attributes in itemCache {
             if attributes.frame.intersects(rect) {
@@ -123,4 +128,5 @@ class ProfileLayout: UICollectionViewLayout {
         contentHeight = 0
         super.invalidateLayout()
     }
+    
 }
