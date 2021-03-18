@@ -52,11 +52,9 @@ class ProfileController: UICollectionViewController {
         setUpCollectionViewInsets()
         setUpLayout()
         
-       
         checkIfUserIsFollowed()
         fetchUserStats()
         fetchPosts()
-       
     }
     
     //MARK: - API
@@ -115,10 +113,11 @@ extension ProfileController: ProfileLayoutDelegate {
     }
     
     func collectionView(collectionView: UICollectionView, heightForAnnotationAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat {
+        let titleTextWidth = withWidth - PostCell.titleTextWidth
         //TitleText
         let titleText = posts[indexPath.item].title
         let font = UIFont.merriWeatherBold(size: 10)
-        let titleTextHeight = titleText.heightForWidth(width: withWidth, font: font)
+        let titleTextHeight = titleText.heightForWidth(width: titleTextWidth, font: font)
         //UserText
         let userText = posts[indexPath.item].ownerFullName
         let userFont = UIFont.openSansRegular(size: 8)

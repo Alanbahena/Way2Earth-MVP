@@ -20,6 +20,7 @@ class FeedCell: UICollectionViewCell {
     }
     
     static let annotationPadding: CGFloat = 11
+    static let titleTextWidth: CGFloat = 35
     
     private var _cellView: UIView?
     private var cellView: UIView {
@@ -31,7 +32,6 @@ class FeedCell: UICollectionViewCell {
             _cellView = cellView
             contentView.addSubview(cellView)
             cellView.addConstraintsAlignedToSuperview()
-//            cellView.backgroundColor = .white
             return cellView
         }
     }

@@ -103,16 +103,16 @@ extension FeedController: FeedLayoutDelegate {
         let imageSize = sizeOfImageAt(url: url!)
         let boundingRect = CGRect(x: 0, y: 0, width: withWidth, height: CGFloat(MAXFLOAT))
         let rect = AVMakeRect(aspectRatio: imageSize! , insideRect: boundingRect)
-
         return rect.size.height
     }
     
     func collectionView(collectionView: UICollectionView, heightForAnnotationAtIndexPath indexPath: IndexPath, withWidth: CGFloat) -> CGFloat {
-        
+        //Width of the titleLabel
+        let titleTextWidth = withWidth - FeedCell.titleTextWidth
         //TitleText
         let titleText = posts[indexPath.item].title
         let font = UIFont.merriWeatherBold(size: 10)
-        let titleTextHeight = titleText.heightForWidth(width: withWidth, font: font)
+        let titleTextHeight = titleText.heightForWidth(width: titleTextWidth, font: font)
         //UserText
         let userText = posts[indexPath.item].ownerFullName
         let userFont = UIFont.openSansRegular(size: 8)
@@ -141,6 +141,7 @@ extension FeedController {
 extension FeedController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let controller = PostController(collectionViewLayout: PostLayout())
+        controller.post = posts[indexPath.row]
         navigationController?.pushViewController(controller, animated: false)
     }
 }
