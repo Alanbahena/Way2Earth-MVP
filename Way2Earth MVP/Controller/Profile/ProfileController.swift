@@ -158,7 +158,9 @@ extension ProfileController {
 
 extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("DEBUG: Post is \(posts[indexPath.row])")
+        let controller = PostController(collectionViewLayout: PostLayout())
+        controller.post = posts[indexPath.row]
+        navigationController?.pushViewController(controller, animated: false)
     }
 }
 

@@ -183,7 +183,11 @@ extension PostController: PostLayoutDelegate {
 
 extension PostController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("DEBUG: Post UserName is \(post?.ownerFullName)")
+        guard let uid = post?.ownerUid else { return }
+        UserService.fetchUser(withUid: uid) { user in
+            let controller = ProfileController(user: user)
+            self.navigationController?.pushViewController(controller, animated: false)
+        }
     }
 }
 

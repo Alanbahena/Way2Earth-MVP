@@ -77,12 +77,15 @@ class UploadPostController: UIViewController {
         return tv
     }()
     
+    let scrollView = UIScrollView()
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
 //        navigationController?.navigationBar.barTintColor = .clear
         configureUI()
+//        configureScrollView()
     }
     
     //MARK: - Actions
@@ -116,6 +119,13 @@ class UploadPostController: UIViewController {
             textView.deleteBackward()
         }
     }
+    
+//    func configureScrollView() {
+//        scrollView.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(scrollView)
+//        scrollView.centerX(inView: view)
+//        scrollView.anchor(top: view.topAnchor, bottom: view.bottomAnchor)
+//    }
     
     func configureUI() {
         view.backgroundColor = .spaceColor
