@@ -10,6 +10,11 @@ import UIKit
 
 let postHeaderCellIdentifier = "PostHeader"
 
+protocol postHeaderCellDelegate: class {
+    func cell(_ cell: PostHeaderCell, wantsToShowCommentsFor post: Post)
+    func cell(_ cell: PostHeaderCell, didLike post: Post)
+}
+
 class PostHeaderCell: UICollectionReusableView {
     
     static let postImagePadding: CGFloat = 10
@@ -24,6 +29,8 @@ class PostHeaderCell: UICollectionReusableView {
     var viewModel: PostViewModel? {
         didSet { configure() }
     }
+    
+    weak var delegate: postHeaderCellDelegate?
     
     private var _headerView: UIView?
     private var headerView: UIView {
@@ -106,8 +113,8 @@ class PostHeaderCell: UICollectionReusableView {
         }
     }
     
-    private var _likesLabel: UILabel?
-    private var likesLabel: UILabel {
+    var _likesLabel: UILabel?
+    var likesLabel: UILabel {
         get {
             if let likesLabel = _likesLabel {
                 return likesLabel
@@ -125,8 +132,8 @@ class PostHeaderCell: UICollectionReusableView {
         }
     }
     
-    private var _likesIcon: UIButton?
-    private var likesIcon: UIButton {
+    var _likesIcon: UIButton?
+    var likesIcon: UIButton {
         get {
             if let likesIcon = _likesIcon {
                 return likesIcon
@@ -220,36 +227,37 @@ class PostHeaderCell: UICollectionReusableView {
     
     
     
-    //MARK: - Helpers
+    //MARK: - Actions
     
     @objc func didTapLike() {
-        print("DEBUG: Likes Tapped ..")
+        guard let viewModel = viewModel else { return }
+        delegate?.cell(self, didLike: viewModel.post)
     }
     
     @objc func didTapComments() {
-        print("DEBUG: Comments Tapped ..")
+        guard let viewModel = viewModel else { return }
+        delegate?.cell(self, wantsToShowCommentsFor: viewModel.post)
     }
 }
 
-    //MARK: - Actions
+    //MARK: - Helpers
 
 extension PostHeaderCell {
-    
-    
     
     func configure() {
         guard let viewModel = viewModel else { return }
         
         //Post
         postImageView.sd_setImage(with: viewModel.imageUrl)
-        commentsLabel.text = "25"
+        commentsLabel.text = viewModel.commentsLabelText
         commentsIcon.setImage(#imageLiteral(resourceName: "CommentsIcon"), for: .normal)
-        likesLabel.text = "512"
-        likesIcon.setImage(#imageLiteral(resourceName: "likeunselected"), for: .normal)
+        likesLabel.text = viewModel.likesLabelText
+        likesIcon.tintColor = .white
+        likesIcon.setImage(viewModel.likeIconImage, for: .normal)
         
         //Description
         titleLabel.text = viewModel.title
-        postTimeLabel.text = "20 hours ago"
+        postTimeLabel.text = "\(viewModel.timesTampString ?? "20 hours ago") ago"
         descriptionLabel.text = viewModel.description
         
         //UserInfo

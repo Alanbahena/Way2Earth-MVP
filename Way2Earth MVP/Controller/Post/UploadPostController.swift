@@ -43,6 +43,7 @@ class UploadPostController: UIViewController {
     private lazy var TitleTextView: InputTextField = {
         let tv = InputTextField()
         tv.placeHolderText = "Give a title to your Post"
+        tv.placeholderShouldCenter = false 
         tv.font = UIFont.RobotoRegular(size: 14)
         tv.textColor = .white
         tv.backgroundColor = .clear

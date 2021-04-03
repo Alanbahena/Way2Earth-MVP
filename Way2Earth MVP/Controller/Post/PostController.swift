@@ -20,7 +20,9 @@ class PostController: UICollectionViewController {
     
     //MARK: - Properties
     
-    private var posts = [Post]()
+    private var posts = [Post]() {
+        didSet{ collectionView.reloadData() }
+    }
     var post: Post?
     
     //MARK: - Lifecycle
@@ -32,6 +34,7 @@ class PostController: UICollectionViewController {
         setTitleViewNavigationBar()
         setRightNavigationButton()
         fetchPosts()
+        checkIfUserLikedPosts()
     }
     
     //MARK: - API
@@ -40,7 +43,15 @@ class PostController: UICollectionViewController {
         guard let post = post else { return }
         PostService.fetchPosts(forUser: post.ownerUid) { posts in
             self.posts = posts
-            self.collectionView.reloadData()
+        }
+    }
+    
+    func checkIfUserLikedPosts() {
+        if let post = post {
+            PostService.checkIfUserLikedPost(post: post) { didLike in
+                self.post?.didLike = didLike
+                self.collectionView.reloadData()
+            }
         }
     }
     
@@ -91,7 +102,7 @@ class PostController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: postHeaderCellIdentifier, for: indexPath) as! PostHeaderCell
-        
+        header.delegate = self
         if let post = post {
             header.viewModel = PostViewModel(post: post)
         }
@@ -171,9 +182,33 @@ extension PostController: PostLayoutDelegate {
     //MARK: - UITableViewDelegate
 
 extension PostController {
-    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("DEBUG: Post UserName is \(post?.ownerFullName)")
+    }
+}
+
+    //MARK: - PostHeaderCellDelegate
+
+extension PostController: postHeaderCellDelegate {
+    func cell(_ cell: PostHeaderCell, wantsToShowCommentsFor post: Post) {
+        let controller = CommentController(post: post)
+        navigationController?.pushViewController(controller, animated: false)
+    }
+    
+    func cell(_ cell: PostHeaderCell, didLike post: Post) {
+        cell.viewModel?.post.didLike.toggle()
+        
+        if post.didLike {
+            PostService.unlikePost(post: post) { _ in
+                cell.likesIcon.setImage(#imageLiteral(resourceName: "likeunselected"), for: .normal)
+                cell.viewModel?.post.likes = post.likes - 1
+            }
+        } else {
+            PostService.likePost(post: post) { _ in
+                cell.likesIcon.setImage(#imageLiteral(resourceName: "LikesIcon"), for: .normal)
+                cell.viewModel?.post.likes = post.likes + 1
+            }
+        }
     }
 }
 

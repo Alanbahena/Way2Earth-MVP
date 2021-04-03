@@ -4,8 +4,7 @@
 //
 //  Created by Alan Bahena on 2/13/21.
 //  Copyright © 2021 Alan Bahena. All rights reserved.
-//  Copyright © 2021 Alan Bahena. All rights reserved.
-//
+
 
 import UIKit
 
@@ -18,7 +17,6 @@ class FeedLayout: UICollectionViewLayout {
     var cache = [CustomLayoutAttributes]()
     
     var numberOfcolumns = 2
-    
     var cellPadding:CGFloat = 5
     
     private var contentHeight: CGFloat = 0
@@ -33,7 +31,14 @@ class FeedLayout: UICollectionViewLayout {
         return CGSize(width: contentWidth, height: contentHeight)
     }
     
+    override class var layoutAttributesClass: AnyClass {
+        return CustomLayoutAttributes.self
+    }
+    
+    
     override func prepare() {
+        super.prepare()
+        
         guard cache.isEmpty, let collection = collectionView else { return }
         let columnWidth  = contentWidth / CGFloat(numberOfcolumns)
         let cellWidth = columnWidth - (cellPadding * 2)
@@ -71,6 +76,7 @@ class FeedLayout: UICollectionViewLayout {
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        super.layoutAttributesForElements(in: rect)
         var layoutAttributes = [UICollectionViewLayoutAttributes]()
         
         for attributes in cache {
@@ -84,5 +90,11 @@ class FeedLayout: UICollectionViewLayout {
     
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
       return cache[indexPath.item]
+    }
+    
+    override func invalidateLayout() {
+        cache.removeAll()
+        contentHeight = 0
+        super.invalidateLayout()
     }
 }

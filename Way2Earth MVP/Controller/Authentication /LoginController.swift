@@ -80,6 +80,7 @@ class LoginController: UIViewController {
         
         configureUI()
         configureNotificationsObservers()
+        dismissKeyboard()
     }
     
     //MARK: - Actions
@@ -145,4 +146,18 @@ extension LoginController: FormViewModel {
         loginButton.backgroundColor = viewModel.buttonBackgroundColor
         loginButton.isEnabled = viewModel.formIsValid
     }
+}
+
+    //MARK: - DismissKeyboard
+
+extension LoginController {
+    func dismissKeyboard() {
+           let tap: UITapGestureRecognizer = UITapGestureRecognizer( target:     self, action:    #selector(LoginController.dismissKeyboardTouchOutside))
+           tap.cancelsTouchesInView = false
+           view.addGestureRecognizer(tap)
+        }
+        
+        @objc private func dismissKeyboardTouchOutside() {
+           view.endEditing(true)
+        }
 }
