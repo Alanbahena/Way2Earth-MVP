@@ -271,7 +271,7 @@ extension ProfileCell {
         //Post
         imageView.sd_setImage(with: viewModel.imageUrl)
         commentsLabel.text = "0"
-        likesLabel.text = "0"
+        likesLabel.text = viewModel.likesLabelText
         commentIcon.image = #imageLiteral(resourceName: "CommentsIcon")
         likesIcon.image = #imageLiteral(resourceName: "LikesIcon")
         

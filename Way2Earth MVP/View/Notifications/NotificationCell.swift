@@ -8,11 +8,21 @@
 
 import UIKit
 
+protocol NotificationCellDelegate: class {
+    func cell(_ cell: NotificationCell, wantsToViewPost postId: String)
+}
+
 let notificationCellIdentifier = "FeedCell"
 
 class NotificationCell: UITableViewCell {
     
     //MARK: - Properties
+    
+    var viewModel: NotificationViewModel? {
+        didSet { configure() }
+    }
+    
+    weak var delegate: NotificationCellDelegate?
     
     let backgroundAlpha: UIView = {
        let iv = UIView()
@@ -27,25 +37,33 @@ class NotificationCell: UITableViewCell {
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         iv.backgroundColor = .lightGray
-        iv.image = #imageLiteral(resourceName: "profileImage")
         return iv
     }()
 
     private let userNameLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 1
         label.font = UIFont.robotoBold(size: 15)
-        label.text = "Alan Bahena"
         return label
     }()
 
     private let infoLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 1
         label.font = UIFont.RobotoRegular(size: 15)
-        label.text = "Commented on yout Post"
+        return label
+    }()
+    
+    private let timeLabel: UILabel = {
+       let label = UILabel()
+        label.numberOfLines = 1
+        label.font = UIFont.RobotoRegular(size: 15)
+        label.textColor = .lightGray
+        label.text = "2m"
         return label
     }()
 
-    private let postImageView: UIImageView = {
+    private lazy var postImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.layer.cornerRadius = 5
@@ -62,8 +80,9 @@ class NotificationCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        selectionStyle = .none
         
-        addSubview(backgroundAlpha)
+        contentView.addSubview(backgroundAlpha)
         backgroundAlpha.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 5, paddingLeft: 10, paddingBottom: 5, paddingRight: 10)
         
         backgroundAlpha.addSubview(profileImageView)
@@ -72,16 +91,18 @@ class NotificationCell: UITableViewCell {
         profileImageView.setDimensions(height: 40, width: 40)
         profileImageView.layer.cornerRadius = 40/2
 
-        addSubview(userNameLabel)
+        backgroundAlpha.addSubview(userNameLabel)
         userNameLabel.anchor(top: backgroundAlpha.topAnchor, left: profileImageView.rightAnchor, paddingTop: 12, paddingLeft: 10)
 
-        addSubview(infoLabel)
-        infoLabel.anchor(top: userNameLabel.bottomAnchor, left: userNameLabel.leftAnchor, right: rightAnchor, paddingTop: 2, paddingRight: 10)
+        backgroundAlpha.addSubview(infoLabel)
+        infoLabel.anchor(top: userNameLabel.bottomAnchor, left: userNameLabel.leftAnchor, paddingTop: 3)
+        
+        backgroundAlpha.addSubview(timeLabel)
+        timeLabel.anchor(top: userNameLabel.bottomAnchor, left: infoLabel.rightAnchor, paddingTop: 3, paddingLeft: 5)
 
-        addSubview(postImageView)
+        backgroundAlpha.addSubview(postImageView)
         postImageView.centerY(inView: self)
         postImageView.anchor(right: backgroundAlpha.rightAnchor, paddingRight: 12, width: 40, height: 40)
-        
     }
     
     required init?(coder: NSCoder) {
@@ -91,6 +112,22 @@ class NotificationCell: UITableViewCell {
     //MARK: - Actions
     
     @objc func handlePostTapped() {
+        guard let postId = viewModel?.notification.postId else { return }
+        delegate?.cell(self, wantsToViewPost: postId)
+    }
+    
+    //MARK: - Helpers
+    
+    func configure() {
+        guard let viewModel = viewModel else { return }
+        
+        profileImageView.sd_setImage(with: viewModel.profileImageUrl)
+        postImageView.sd_setImage(with: viewModel.postImageUrl)
+        
+        userNameLabel.text = viewModel.notificationUserName
+        infoLabel.text = viewModel.notificationMessage
+        
+        postImageView.isHidden = viewModel.shouldHidePostImage
         
     }
 }

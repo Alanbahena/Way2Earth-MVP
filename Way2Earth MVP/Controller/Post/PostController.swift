@@ -200,6 +200,9 @@ extension PostController: postHeaderCellDelegate {
     }
     
     func cell(_ cell: PostHeaderCell, didLike post: Post) {
+        guard let tab = tabBarController as? MainTabController else { return }
+        guard let user = tab.user else { return }
+        
         cell.viewModel?.post.didLike.toggle()
         
         if post.didLike {
@@ -211,6 +214,8 @@ extension PostController: postHeaderCellDelegate {
             PostService.likePost(post: post) { _ in
                 cell.likesIcon.setImage(#imageLiteral(resourceName: "LikesIcon"), for: .normal)
                 cell.viewModel?.post.likes = post.likes + 1
+                
+                NotificationService.uploadNotification(toUid: post.ownerUid, fromUser: user, type: .like, post: post)
             }
         }
     }
