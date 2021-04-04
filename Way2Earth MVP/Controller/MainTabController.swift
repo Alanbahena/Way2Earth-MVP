@@ -108,6 +108,11 @@ extension MainTabController: UITabBarControllerDelegate {
 //MARK: -  UIImagePickerControllerDelegate
 
 extension MainTabController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        selectedIndex = 0
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: false) {
             guard let selectedImage = info[.originalImage] as? UIImage else { return }
@@ -126,6 +131,11 @@ extension MainTabController: UIImagePickerControllerDelegate, UINavigationContro
     //MARK: - UploadPostControllerDelegate
 
 extension MainTabController: UploadPostControllerDelegate {
+    func controllerCancelUploadingPost(_ controller: UploadPostController) {
+        selectedIndex = 0
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
     func controllerDidFinishUploadingPost(_ controller: UploadPostController) {
         selectedIndex = 0
         controller.dismiss(animated: true, completion: nil)
