@@ -22,15 +22,15 @@ class FeedController: UICollectionViewController {
     
     private var posts = [Post]()
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        navigationController?.setNavigationBarHidden(true, animated: animated)
-//    }
-//
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        navigationController?.setNavigationBarHidden(false, animated: animated)
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,18 +50,18 @@ class FeedController: UICollectionViewController {
         fetchPosts()
     }
 
-    @objc func handleLogOut() {
-        do {
-            try Auth.auth().signOut()
-            let controller = WelcomeController()
-            controller.delegate = self.tabBarController as? MainTabController
-            let nav = UINavigationController(rootViewController: controller)
-            nav.modalPresentationStyle = .fullScreen
-            present(nav, animated: false, completion: nil)
-        } catch {
-            print("DEBUG: Failed to sign out")
-        }
-    }
+//    @objc func handleLogOut() {
+//        do {
+//            try Auth.auth().signOut()
+//            let controller = WelcomeController()
+//            controller.delegate = self.tabBarController as? MainTabController
+//            let nav = UINavigationController(rootViewController: controller)
+//            nav.modalPresentationStyle = .fullScreen
+//            present(nav, animated: false, completion: nil)
+//        } catch {
+//            print("DEBUG: Failed to sign out")
+//        }
+//    }
     
     //MARK: - API
     
@@ -79,7 +79,7 @@ class FeedController: UICollectionViewController {
         collectionView.backgroundColor = UIColor.spaceColor
         collectionView.register(FeedCell.self, forCellWithReuseIdentifier: feedCellIdentifier)
         collectionView.contentInset = UIEdgeInsets(top: 15, left: 5, bottom: 5, right: 5)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "LogOut", style: .plain, target: self, action: #selector(handleLogOut))
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "LogOut", style: .plain, target: self, action: #selector(handleLogOut))
         
         let refresher = UIRefreshControl()
         refresher.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)

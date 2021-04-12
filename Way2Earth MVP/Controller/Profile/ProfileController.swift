@@ -167,6 +167,11 @@ extension ProfileController {
     //MARK: - ProfileHeaderDelegate
 
 extension ProfileController: ProfileHeaderDelegate {
+    func header(_profileHeader: ProfileHeader, didTapSettingsButton user: User) {
+        let controller = ProfileSettingsController()
+        navigationController?.pushViewController(controller, animated: false)
+    }
+    
     func header(_ profileHeader: ProfileHeader, didTapActionButtonFor user: User) {
         guard let tab = tabBarController as? MainTabController else { return }
         guard let currentUser = tab.user else { return }

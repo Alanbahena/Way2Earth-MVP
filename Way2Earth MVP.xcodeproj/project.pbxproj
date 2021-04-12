@@ -23,6 +23,7 @@
 		1B2A42A826052BC30058F39D /* CommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2A42A726052BC30058F39D /* CommentService.swift */; };
 		1B2A9B2C25E84DA400FF61F8 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2A9B2B25E84DA400FF61F8 /* ProfileCell.swift */; };
 		1B2A9B2F25E84DAE00FF61F8 /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2A9B2E25E84DAE00FF61F8 /* ProfileHeader.swift */; };
+		1B2AF618261A5BF000D41B0D /* ProfileSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2AF617261A5BF000D41B0D /* ProfileSettingsController.swift */; };
 		1B3ABB2F2619638300830C41 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ABB2E2619638300830C41 /* Notification.swift */; };
 		1B3ABB322619663200830C41 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ABB312619663200830C41 /* NotificationService.swift */; };
 		1B3ABB3526196DD800830C41 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3ABB3426196DD800830C41 /* NotificationViewModel.swift */; };
@@ -89,6 +90,7 @@
 		1B2A42A726052BC30058F39D /* CommentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentService.swift; sourceTree = "<group>"; };
 		1B2A9B2B25E84DA400FF61F8 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		1B2A9B2E25E84DAE00FF61F8 /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
+		1B2AF617261A5BF000D41B0D /* ProfileSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsController.swift; sourceTree = "<group>"; };
 		1B3ABB2E2619638300830C41 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		1B3ABB312619663200830C41 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		1B3ABB3426196DD800830C41 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 			children = (
 				1B5F5BBB25D08CB2004940A4 /* ProfileController.swift */,
 				1B56FD2025F07CC400E8A9DE /* EditProfileController.swift */,
+				1B2AF617261A5BF000D41B0D /* ProfileSettingsController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -606,6 +609,7 @@
 				1B0B1FFF25FAB11D0041B9FD /* PostViewModel.swift in Sources */,
 				1B5F5B8925D0896D004940A4 /* AppDelegate.swift in Sources */,
 				1B56FD1E25F07C6100E8A9DE /* UserService.swift in Sources */,
+				1B2AF618261A5BF000D41B0D /* ProfileSettingsController.swift in Sources */,
 				1B6CC36F25E9822A00B603CF /* ProfileLayout.swift in Sources */,
 				1B197ADF25F98566001D124E /* PostService.swift in Sources */,
 				1B3ABB3526196DD800830C41 /* NotificationViewModel.swift in Sources */,

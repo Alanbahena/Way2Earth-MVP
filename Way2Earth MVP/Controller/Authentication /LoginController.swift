@@ -73,6 +73,15 @@ class LoginController: UIViewController {
         return button
     }()
     
+    private let cancelButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(#imageLiteral(resourceName: "Cancel"), for: .normal)
+        button.setDimensions(height: 25, width: 25)
+        button.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
+        button.tintColor = .white
+        return button
+    }()
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -111,6 +120,10 @@ class LoginController: UIViewController {
         updateForm()
     }
     
+    @objc func cancelTapped() {
+        navigationController?.popViewController(animated: true)
+    }
+    
     //MARK: - Helpers
     
     func configureUI () {
@@ -131,6 +144,8 @@ class LoginController: UIViewController {
         dontHaveAccountButton.centerX(inView: view)
         dontHaveAccountButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingBottom: 10)
         
+        view.addSubview(cancelButton)
+        cancelButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, paddingTop: 15, paddingLeft: 15)
     }
     
     func configureNotificationsObservers() {

@@ -68,18 +68,42 @@ class RegistrationController: UIViewController {
         return button
     }()
     
+    private let cancelButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(#imageLiteral(resourceName: "Cancel"), for: .normal)
+        button.setDimensions(height: 25, width: 25)
+        button.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
+        button.tintColor = .white
+        return button
+    }()
+    
+    private var scrollView: UIScrollView = {
+        let v = UIScrollView()
+        v.translatesAutoresizingMaskIntoConstraints = false
+        return v
+    }()
+    
+    private var contentView: UIView = {
+        let v = UIView()
+        v.translatesAutoresizingMaskIntoConstraints = false
+        return v
+    }()
+    
+    private var isExpand: Bool = false
+    
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setUpScrollView()
         configureUI()
         configureNotificationsObservers()
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-//           NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
+        registerKeyboardNotifications()
         
     }
+    
     
     //MARK: - Actions
     
@@ -127,29 +151,42 @@ class RegistrationController: UIViewController {
         }
     }
     
+    @objc func cancelTapped() {
+        navigationController?.popViewController(animated: true)
+    }
+    
     //MARK: - Helpers
     
     func configureUI() {
         view.backgroundColor = .spaceColor
+        scrollView.addSubview(viewBackground)
+        viewBackground.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
         
-        view.addSubview(viewBackground)
-        viewBackground.frame = view.frame
         
-        view.addSubview(plusPhotoButton)
-        plusPhotoButton.centerX(inView: view)
+        scrollView.addSubview(plusPhotoButton)
+        plusPhotoButton.centerX(inView: scrollView)
         plusPhotoButton.setDimensions(height: 140, width: 140)
-        plusPhotoButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 30)
+        plusPhotoButton.anchor(top: scrollView.topAnchor, paddingTop: 30)
         
         let stack = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, fullNameTextField, userNameTextField, signUpButton])
         stack.axis = .vertical
         stack.spacing = 25
         
-        view.addSubview(stack)
+        scrollView.addSubview(stack)
         stack.anchor(top: plusPhotoButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 30, paddingLeft: 35, paddingRight: 35)
         
-        view.addSubview(alreadyAccountButton)
+        scrollView.addSubview(alreadyAccountButton)
         alreadyAccountButton.centerX(inView: view)
-        alreadyAccountButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, paddingBottom: 10)
+        alreadyAccountButton.anchor(bottom: view.bottomAnchor, paddingBottom: 35)
+        
+        scrollView.addSubview(cancelButton)
+        cancelButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, paddingTop: 15, paddingLeft: 15)
+    }
+    
+    func setUpScrollView() {
+        view.addSubview(scrollView)
+        scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        scrollView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
     }
     
     func configureNotificationsObservers() {
@@ -158,6 +195,16 @@ class RegistrationController: UIViewController {
         fullNameTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         userNameTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
     }
+    
+    func registerKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDissapear), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
 }
 
 //MARK: - FormViewModel
@@ -193,18 +240,21 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
 
 extension RegistrationController {
     
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height
-            }
-        }
-    }
-
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if self.view.frame.origin.y != 0 {
-            self.view.frame.origin.y = 0
+    @objc func keyboardAppear() {
+        if !isExpand {
+            self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.scrollView.frame.height + 50)
+            isExpand = true
         }
     }
     
+    @objc func keyboardDissapear() {
+        if isExpand {
+            self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.scrollView.frame.height - 50)
+            isExpand = false
+        }
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }

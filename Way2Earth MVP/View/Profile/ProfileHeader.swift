@@ -13,6 +13,7 @@ let profileHeaderIdentifier = "ProfileCell"
 
 protocol ProfileHeaderDelegate: class {
     func header(_ profileHeader: ProfileHeader, didTapActionButtonFor user: User)
+    func header( _profileHeader: ProfileHeader, didTapSettingsButton user: User)
 }
 
 class ProfileHeader: UICollectionReusableView {
@@ -70,8 +71,6 @@ class ProfileHeader: UICollectionReusableView {
         dl.numberOfLines = 0
         dl.textColor = .white
         dl.textAlignment = .center
-//        dl.text = "A person who loves to travel. The sky is not the limit"
-        dl.text = ""
         return dl
     }()
     
@@ -105,6 +104,14 @@ class ProfileHeader: UICollectionReusableView {
         label.numberOfLines = 0
         label.textAlignment = .center
         return label
+    }()
+    
+    private lazy var settingsButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(#imageLiteral(resourceName: "SettingsProfile"), for: .normal)
+        button.tintColor = .white
+        button.addTarget(self, action: #selector(handleSettingsProfile), for: .touchUpInside)
+        return button
     }()
     
     
@@ -152,9 +159,15 @@ class ProfileHeader: UICollectionReusableView {
         let stackFollowers = UIStackView(arrangedSubviews: [postLabel, followersLabel, followingLabel])
         stackFollowers.distribution = .fillEqually
         
+        //StackFollowers
         addSubview(stackFollowers)
         stackFollowers.centerX(inView: profileImageView)
         stackFollowers.anchor(top: descriptionLabel.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 10 , paddingLeft: 25, paddingRight: 25)
+        
+        //SettingsButton
+        addSubview(settingsButton)
+        settingsButton.anchor(top: profileBackgroundImage.bottomAnchor, left: leftAnchor, paddingTop: 20, paddingLeft: 15)
+        settingsButton.setDimensions(height: 23, width: 23)
        
     }
     
@@ -163,6 +176,11 @@ class ProfileHeader: UICollectionReusableView {
     }
     
     //MARK: - Actions
+    
+    @objc func handleSettingsProfile() {
+        guard let viewModel = viewModel else { return }
+        delegate?.header(_profileHeader: self, didTapSettingsButton: viewModel.user)
+    }
     
     @objc func handleEditProfileFollowTapped() {
         guard let viewModel = viewModel else { return }
@@ -176,6 +194,7 @@ class ProfileHeader: UICollectionReusableView {
         profileNameLabel.text = viewModel.profileNameLabel
         profileImageView.sd_setImage(with: viewModel.profileImageUrl)
         userNameLabel.text = viewModel.userName
+        descriptionLabel.text = "A person who loves to travel. The sky is not the limit"
         
         editProfileButton.setTitle(viewModel.followButtontext, for: .normal)
         editProfileButton.setTitleColor(viewModel.followButtonTextColor, for: .normal)

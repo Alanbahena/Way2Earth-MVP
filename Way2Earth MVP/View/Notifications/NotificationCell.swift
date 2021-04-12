@@ -126,6 +126,7 @@ class NotificationCell: UITableViewCell {
         
         userNameLabel.text = viewModel.notificationUserName
         infoLabel.text = viewModel.notificationMessage
+        timeLabel.text = viewModel.timestampString
         
         postImageView.isHidden = viewModel.shouldHidePostImage
         

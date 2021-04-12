@@ -282,7 +282,7 @@ extension PostCell {
         //User
         profileImageView.sd_setImage(with: viewModel.userProfileImageUrl)
         titleTextLabel.text = viewModel.title
-        postTimeLabel.text = "20 hours ago"
+        postTimeLabel.text = "\(viewModel.timesTampString ?? "") ago"
         userTextLabel.text = viewModel.userFullName
     }
     
